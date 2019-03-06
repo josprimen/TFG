@@ -30,3 +30,17 @@ scores = model.evaluate(training_data, target_data)
 
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 print(model.predict(training_data).round())
+
+
+# Para guardar el modelo:
+
+# Serializar el modelo a JSON
+model_json = model.to_json()
+with open("model.json", "w") as json_file:
+        json_file.write(model_json)
+
+# Serializar los pesos a HDF5
+model.save_weights("model.h5")
+print("Modelo Guardado!")
+
+# Vemos en otro archivo cómo se carga este modelo guardado
