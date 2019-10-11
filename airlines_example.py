@@ -8,7 +8,7 @@ from keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
-#Esto para representar los datos y ver que funciona
+#Esto para representar los datos en una gráfica
 #conjunto_datos = pandas.read_csv('airline-passengers.csv', usecols=[1], engine='python')
 #plt.plot(conjunto_datos)
 #plt.show()
@@ -43,33 +43,76 @@ print('Tamaño cojunto entrenamiento: ' +
 print('Conjunto entrenamiento: \n' + str(entrenamiento))
 print('Conjunto pruebas: \n' + str(test))
 
-#Convertir un array de valores en un conjunto en forma de matriz
-#Lo único que estamos haciendo es ir de mes en mes y ver cuantos viajeros había. Viajeros será la x y la y será el mes
-#Esto se hace creo para luego poder coger de dos en dos meses y cosas así
-def crear_conjunto(conjunto, vista_atras=1):
-    datosX, datosY = [],[]
-    for i in range(len(conjunto)- vista_atras-1):
-        #aux = conjunto[i:(i+vista_atras), 0] esto te devuelve un array por cada valor y haces return de un array de arrays
-        aux = conjunto[i, 0]
-        datosX.append(aux)
-        datosY.append(conjunto[i + vista_atras, 0])
-    return np.array(datosX), np.array(datosY)
 
-entrenamientoX, entrenamientoY = crear_conjunto(entrenamiento)
-testX, testY = crear_conjunto(test)
+#Creamos los conjuntos de dato con el formato adecuado para LSTM
 
-print('Conjunto entrenamiento t: \n' + str(entrenamientoX))
-print('Conjunto entrenamiento t+1: \n' + str(entrenamientoY))
-print('Conjunto pruebas t: \n' + str(testX))
-print('Conjunto pruebas t+1: \n' + str(testY))
+def datosX (conjunto):
+    aux = []
+    for i in range (len(conjunto)-2):
+        a = [conjunto[i]]
+        aux.append(a)
+    return np.array(aux)
 
-#Si tenemos Y que es una matriz de tamaño n filas y m columnas Y.shape devuelve (n,m)
-#array = geek.arange(8) te crea un array del 0 al 7
-#array = geek.arange(8).reshape(2, 4) te crea una matriz de 2 filas y 4 columnas con ese array [[0 1 2 3]
- #                                                                                             [4 5 6 7]]
+def datosY (conjunto):
+    aux = []
+    for i in range (len(conjunto)-2):
+        aux.append(conjunto[i+1,0])
+    return np.array(aux)
 
-entrenamientoX = np.reshape(entrenamientoX, (entrenamientoX.shape[0], 1, entrenamientoX.shape[1]))
-testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 
-print('Conjunto entrenamiento reshapeado t: \n' + str(entrenamientoX))
-print('Conjunto pruebas reshapeado t: \n' + str(testX))
+entrenamientoX = datosX(entrenamiento)
+entrenamientoY = datosY(entrenamiento)
+
+pruebasX = datosX(test)
+pruebasY = datosY(test)
+
+
+
+print('Conjunto de entrenamiento t mio bien: \n' + str(entrenamientoX))
+print('Conjunto de entrenamiento t+1 mio: \n' + str(entrenamientoY))
+print('Conjunto prueba t: \n' + str(pruebasX))
+print('Conjunto prueba t+1: \n' + str(pruebasY))
+
+
+
+# creamos y entrenamos la red LSTM
+paso_atras = 1 #de cúantas unidades de tiempo son los pasos
+model = Sequential()
+model.add(LSTM(4, input_shape=(1, paso_atras)))
+model.add(Dense(1))
+model.compile(loss='mean_squared_error', optimizer='adam')
+
+model.fit(entrenamientoX, entrenamientoY, epochs=100, batch_size=1, verbose=2)
+
+
+# Hacemos la predicción
+trainPredict = model.predict(entrenamientoX)
+print('La prediccion de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
+testPredict = model.predict(pruebasX)
+print('La prediccion de la red neuronal para los datos de test: \n' + str(testPredict))
+# Invertir el normalizado para obtener los datos de pasajeros en escala unidades de 1000
+trainPredict = minmax.inverse_transform(trainPredict)
+print('La prediccion de la red neuronal para los datos de entrenamiento INVERTIDOS: \n' + str(trainPredict))
+trainY = minmax.inverse_transform([entrenamientoY])
+testPredict = minmax.inverse_transform(testPredict)
+print('La prediccion de la red neuronal para los datos de test INVERTLDOS: \n' + str(testPredict))
+testY = minmax.inverse_transform([pruebasY])
+# Calculamos el error cuadrático medio
+trainScore = math.sqrt(mean_squared_error(trainY[0], trainPredict[:,0]))
+print('Train Score: %.2f RMSE' % (trainScore))
+testScore = math.sqrt(mean_squared_error(testY[0], testPredict[:,0]))
+print('Test Score: %.2f RMSE' % (testScore))
+
+# shift train predictions for plotting
+trainPredictPlot = np.empty_like(conjunto)
+trainPredictPlot[:, :] = np.nan
+trainPredictPlot[paso_atras:len(trainPredict)+paso_atras, :] = trainPredict
+# shift test predictions for plotting
+testPredictPlot = np.empty_like(conjunto)
+testPredictPlot[:, :] = np.nan
+testPredictPlot[len(trainPredict)+(paso_atras*2)+1:len(conjunto)-1, :] = testPredict
+# plot baseline and predictions
+plt.plot(minmax.inverse_transform(conjunto))
+plt.plot(trainPredictPlot)
+plt.plot(testPredictPlot)
+plt.show()
