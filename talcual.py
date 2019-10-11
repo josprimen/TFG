@@ -39,6 +39,7 @@ print('test: ' + str(test))
 def create_dataset(dataset, look_back=1):
 	dataX, dataY = [], []
 	for i in range(len(dataset)-look_back-1):
+		print(i)
 		a = dataset[i:(i+look_back), 0]
 		dataX.append(a)
 		dataY.append(dataset[i + look_back, 0])
