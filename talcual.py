@@ -75,11 +75,11 @@ print('reshape testx time_step: ' + str(testX_timestep))
 
 # create and fit the LSTM network
 model = Sequential()
-model.add(LSTM(4, input_shape=(look_back,1)))
+#model.add(LSTM(4, input_shape=(look_back,1)))
 
 # first model layer code with memory
-#batch_size = 1
-#model.add(LSTM(4, batch_input_shape=(batch_size, look_back, 1), stateful=True))
+batch_size = 1
+model.add(LSTM(4, batch_input_shape=(batch_size, look_back, 1), stateful=True))
 
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
@@ -90,23 +90,26 @@ print(trainX_timestep)
 print('trainY: \n')
 #print(trainY)
 print(trainY_timestep)
-model.fit(trainX_timestep, trainY_timestep, epochs=100, batch_size=1, verbose=2)
+#model.fit(trainX_timestep, trainY_timestep, epochs=100, batch_size=1, verbose=2)
 
 # fit code with memory
-#for i in range(100):
- #   model.fit(trainX, trainY, epochs=1, batch_size=batch_size, verbose=2, shuffle=False)
-  #  model.reset_states()
+for i in range(100):
+    model.fit(trainX_timestep, trainY_timestep, epochs=1, batch_size=batch_size, verbose=2, shuffle=False)
+    model.reset_states()
 
 # make predictions
-trainPredict = model.predict(trainX_timestep)
-print('La prediccion de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
-testPredict = model.predict(testX_timestep)
-print('La prediccion de la red neuronal para los datos de test: \n' + str(testPredict))
+#trainPredict = model.predict(trainX_timestep)
+#print('La prediccion de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
+#testPredict = model.predict(testX_timestep)
+#print('La prediccion de la red neuronal para los datos de test: \n' + str(testPredict))
 
 # make predictions with memory
-#trainPredict = model.predict(trainX, batch_size=batch_size)
-#model.reset_states()
-#testPredict = model.predict(testX, batch_size=batch_size)
+trainPredict = model.predict(trainX_timestep, batch_size=batch_size)
+print('La prediccion de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
+model.reset_states()
+testPredict = model.predict(testX_timestep, batch_size=batch_size)
+print('La prediccion de la red neuronal para los datos de test: \n' + str(testPredict))
+
 
 # invert predictions
 trainPredict = scaler.inverse_transform(trainPredict)
