@@ -75,48 +75,50 @@ print('reshape testx time_step: ' + str(testX_timestep))
 
 # create and fit the LSTM network
 model = Sequential()
-model.add(LSTM(4, input_shape=(1, look_back)))
+model.add(LSTM(4, input_shape=(look_back,1)))
 
 # first model layer code with memory
-batch_size = 1
-model.add(LSTM(4, batch_input_shape=(batch_size, look_back, 1), stateful=True))
+#batch_size = 1
+#model.add(LSTM(4, batch_input_shape=(batch_size, look_back, 1), stateful=True))
 
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
 print('Datos que va a usar la red neuronal: \n')
 print('trainX: \n')
-print(trainX)
+#print(trainX)
+print(trainX_timestep)
 print('trainY: \n')
-print(trainY)
-model.fit(trainX, trainY, epochs=100, batch_size=1, verbose=2)
+#print(trainY)
+print(trainY_timestep)
+model.fit(trainX_timestep, trainY_timestep, epochs=100, batch_size=1, verbose=2)
 
 # fit code with memory
-for i in range(100):
-    model.fit(trainX, trainY, epochs=1, batch_size=batch_size, verbose=2, shuffle=False)
-    model.reset_states()
+#for i in range(100):
+ #   model.fit(trainX, trainY, epochs=1, batch_size=batch_size, verbose=2, shuffle=False)
+  #  model.reset_states()
 
 # make predictions
-trainPredict = model.predict(trainX)
+trainPredict = model.predict(trainX_timestep)
 print('La prediccion de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
-testPredict = model.predict(testX)
+testPredict = model.predict(testX_timestep)
 print('La prediccion de la red neuronal para los datos de test: \n' + str(testPredict))
 
 # make predictions with memory
-trainPredict = model.predict(trainX, batch_size=batch_size)
-model.reset_states()
-testPredict = model.predict(testX, batch_size=batch_size)
+#trainPredict = model.predict(trainX, batch_size=batch_size)
+#model.reset_states()
+#testPredict = model.predict(testX, batch_size=batch_size)
 
 # invert predictions
 trainPredict = scaler.inverse_transform(trainPredict)
 print('La prediccion de la red neuronal para los datos de entrenamiento INVERTIDOS: \n' + str(trainPredict))
-trainY = scaler.inverse_transform([trainY])
+trainY_timestep = scaler.inverse_transform([trainY_timestep])
 testPredict = scaler.inverse_transform(testPredict)
 print('La prediccion de la red neuronal para los datos de test INVERTLDOS: \n' + str(testPredict))
-testY = scaler.inverse_transform([testY])
+testY_timestep = scaler.inverse_transform([testY_timestep])
 # calculate root mean squared error
-trainScore = math.sqrt(mean_squared_error(trainY[0], trainPredict[:, 0]))
+trainScore = math.sqrt(mean_squared_error(trainY_timestep[0], trainPredict[:, 0]))
 print('Train Score: %.2f RMSE' % (trainScore))
-testScore = math.sqrt(mean_squared_error(testY[0], testPredict[:, 0]))
+testScore = math.sqrt(mean_squared_error(testY_timestep[0], testPredict[:, 0]))
 print('Test Score: %.2f RMSE' % (testScore))
 
 # shift train predictions for plotting
