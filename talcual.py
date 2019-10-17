@@ -94,7 +94,7 @@ print(trainY_timestep)
 #model.fit(trainX_timestep, trainY_timestep, epochs=100, batch_size=1, verbose=2)
 
 # fit code with memory
-for i in range(100):
+for i in range(300):
     model.fit(trainX_timestep, trainY_timestep, epochs=1, batch_size=batch_size, verbose=2, shuffle=False)
     model.reset_states()
 
