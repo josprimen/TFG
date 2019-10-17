@@ -79,6 +79,7 @@ model = Sequential()
 
 # first model layer code with memory
 batch_size = 1
+model.add(LSTM(4, batch_input_shape=(batch_size, look_back, 1), stateful=True, return_sequences=True))
 model.add(LSTM(4, batch_input_shape=(batch_size, look_back, 1), stateful=True))
 
 model.add(Dense(1))
