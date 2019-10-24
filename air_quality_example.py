@@ -49,7 +49,7 @@ datos_normalizados = scaler.fit_transform(datoss)
 def datosX (conjunto):
     df = DataFrame(conjunto)
     aux = []
-    for i in range (len(conjunto)-2):
+    for i in range (len(conjunto)-1):
         a = [[df[0][i], df[1][i], df[2][i], df[3][i], df[4][i], df[5][i], df[6][i], df[7][i]]]
         aux.append(a)
     return np.array(aux)
@@ -57,14 +57,17 @@ def datosX (conjunto):
 def datosY (conjunto):
     df = DataFrame(conjunto)
     aux = []
-    for i in range (len(conjunto)-2):
+    for i in range (len(conjunto)-1):
         aux.append(df[0][i+1])
     return np.array(aux)
 
 #Un año de entrenamiento
 numero_horas_entrenamiento = 365*24
-entrenamiento = datos_normalizados[:numero_horas_entrenamiento, :]
-test = datos_normalizados[numero_horas_entrenamiento:, :]
+#entrenamiento = datos_normalizados[:numero_horas_entrenamiento, :]
+#test = datos_normalizados[numero_horas_entrenamiento:, :]
+
+test = datos_normalizados[:numero_horas_entrenamiento, :]
+entrenamiento = datos_normalizados[numero_horas_entrenamiento:, :]
 
 entrenamientoX, entrenamientoY = datosX(entrenamiento), datosY(entrenamiento)
 testX, testY = datosX(test), datosY(test)
@@ -85,7 +88,7 @@ model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
 # fit network
-history = model.fit(entrenamientoX, entrenamientoY, epochs=50, batch_size=72, validation_data=(testX, testY), verbose=2, shuffle=False)
+history = model.fit(entrenamientoX, entrenamientoY, epochs=25, batch_size=72, validation_data=(testX, testY), verbose=2, shuffle=False)
 # plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')

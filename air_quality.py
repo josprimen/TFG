@@ -125,8 +125,10 @@ values = reframed.values
 print('casi final ')
 print(values)
 n_train_hours = 365 * 24
-train = values[:n_train_hours, :]
-test = values[n_train_hours:, :]
+#train = values[:n_train_hours, :]
+#test = values[n_train_hours:, :]
+test = values[:n_train_hours, :]
+train = values[n_train_hours:, :]
 # split into input and outputs
 train_X, train_y = train[:, :-1], train[:, -1]
 test_X, test_y = test[:, :-1], test[:, -1]
