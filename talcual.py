@@ -71,6 +71,8 @@ trainX_timestep = numpy.reshape(trainX_timestep, (trainX_timestep.shape[0], trai
 testX_timestep = numpy.reshape(testX_timestep, (testX_timestep.shape[0], testX_timestep.shape[1], 1))
 
 print('reshape entrenamientox time_step : ' + str(trainX_timestep))
+print('Con shape')
+print(trainX_timestep.shape)
 print('reshape testx time_step: ' + str(testX_timestep))
 
 # create and fit the LSTM network

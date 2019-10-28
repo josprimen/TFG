@@ -145,6 +145,8 @@ train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[1]))
 test_X = test_X.reshape((test_X.shape[0], 1, test_X.shape[1]))
 print('train_X reshapeado:\n')
 print(train_X)
+print('Con shape')
+print(train_X.shape)
 print('aaaaa')
 print(train_X.shape, train_y.shape, test_X.shape, test_y.shape)
 

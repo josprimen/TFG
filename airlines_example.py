@@ -69,6 +69,8 @@ pruebasY = datosY(test)
 
 
 print('Conjunto de entrenamiento t mio bien: \n' + str(entrenamientoX))
+print('Con shape')
+print(entrenamientoX.shape)
 print('Conjunto de entrenamiento t+1 mio: \n' + str(entrenamientoY))
 print('Conjunto prueba t: \n' + str(pruebasX))
 print('Conjunto prueba t+1: \n' + str(pruebasY))
