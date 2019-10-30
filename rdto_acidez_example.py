@@ -24,6 +24,22 @@ df.to_csv('datos_aceituna_tratados_2015_2016.csv')
 datos = df.values
 print(datos)
 
+"""
+################################################################
+da1 = read_csv('datos_aceituna_tratados_2015_2016.csv', usecols=[1], engine='python')
+da2 = read_csv('datos_aceituna_tratados_2016_2017.csv', usecols=[1], engine='python')
+da3 = read_csv('datos_aceituna_tratados_2017_2018.csv', usecols=[1], engine='python')
+da4 = read_csv('datos_aceituna_tratados_2018_2019.csv', usecols=[1], engine='python')
+da1 = da1.values
+da2 = da2.values
+da3 = da3.values
+da4 = da4.values
+da_prueba = np.concatenate((da1,da2,da3,da4))
+da_prueba_df = DataFrame(da_prueba)
+da_prueba_df.to_csv('datos_aceituna_tratados.csv')
+################################################################
+"""
+
 pyplot.plot(datos[:])
 pyplot.show()
 
