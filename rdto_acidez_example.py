@@ -15,12 +15,12 @@ from keras.layers import Dense
 from keras.layers import LSTM
 
 
-datos=read_csv('datos_aceituna.csv', usecols=[0], engine='python')
+datos=read_csv('datos_aceituna_2015_2016.csv', usecols=[0], engine='python')
 datos = datos.values
 datos = datos.astype('float32')
 df = DataFrame(datos)
 df = df.loc[~(df==0).all(axis=1)]
-df.to_csv('datos_aceituna_tratados.csv')
+df.to_csv('datos_aceituna_tratados_2015_2016.csv')
 datos = df.values
 print(datos)
 
