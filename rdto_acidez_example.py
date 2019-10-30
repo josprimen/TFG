@@ -15,14 +15,17 @@ from keras.layers import Dense
 from keras.layers import LSTM
 
 
-datos=read_csv('datos_aceituna_2015_2016.csv', usecols=[0], engine='python')
+datos=read_csv('datos_aceituna_tratados.csv', usecols=[1], engine='python')
 datos = datos.values
 datos = datos.astype('float32')
 df = DataFrame(datos)
 df = df.loc[~(df==0).all(axis=1)]
-df.to_csv('datos_aceituna_tratados_2015_2016.csv')
+#df.to_csv('datos_aceituna_tratados_2015_2016.csv')
 datos = df.values
 print(datos)
+
+pyplot.plot(datos[:])
+pyplot.show()
 
 """
 ################################################################
@@ -39,9 +42,6 @@ da_prueba_df = DataFrame(da_prueba)
 da_prueba_df.to_csv('datos_aceituna_tratados.csv')
 ################################################################
 """
-
-pyplot.plot(datos[:])
-pyplot.show()
 
 minmax = MinMaxScaler(feature_range=(0,1))
 conjunto = minmax.fit_transform(datos)
