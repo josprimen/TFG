@@ -163,7 +163,9 @@ model.add(LSTM(50, input_shape=(train_X.shape[1], train_X.shape[2])))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 #Early Stoping
-es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5)
+#es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5, min_delta=0.001)
+
 # fit network
 history = model.fit(train_X, train_y, epochs=100, batch_size=72, validation_data=(test_X, test_y), verbose=2, shuffle=False, callbacks=[es])
 # plot history
