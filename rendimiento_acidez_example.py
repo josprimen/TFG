@@ -123,6 +123,24 @@ print('Train Score: %.2f RMSE' % (trainScore))
 print('Test Score: %.2f RMSE' % (testScore))
 
 
+
+
+
+results = [[datos_real_entrenamiento, datos_prediccion_entrenamiento], [datos_real_test, datos_prediccion_test]]
+aux = 1
+pyplot.figure()
+for result in results:
+    pyplot.subplot(2, 1, aux)
+    pyplot.plot(result[0])
+    pyplot.plot(result[1])
+    aux = aux+1
+
+pyplot.show()
+
+
+'''
+Probar a hacer una gráfica con las dos partes reales (entrenamiento y test) y compararla con los datos completos del datos ACIDEZ
+
 paso_atras = 1
 # shift train predictions for plotting
 trainPredictPlot = np.empty_like(conjunto)
@@ -137,3 +155,4 @@ pyplot.plot(scaler.inverse_transform(conjunto))
 pyplot.plot(trainPredictPlot)
 pyplot.plot(testPredictPlot)
 pyplot.show()
+'''
