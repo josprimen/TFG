@@ -78,7 +78,7 @@ model.add(LSTM(4, input_shape=(1, paso_atras)))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
-history = model.fit(entrenamientoX, entrenamientoY, epochs=10, validation_split=0.3,  batch_size=1, verbose=2)
+history = model.fit(entrenamientoX, entrenamientoY, epochs=10, validation_split=0.3, batch_size=1, verbose=2)
 
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')
