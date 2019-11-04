@@ -17,6 +17,13 @@ from keras.layers import LSTM
 
 datos=read_csv('datos_aceituna_gilena.csv', usecols=[3,5], engine='python')
 datos = datos.values
+
+#PARA HACER UNA PREDICCION DE LA ACIDEZ CAMBIAMOS LAS COLUMNAS DE POSICION (Hay que usar una copia, las asignaciones cambian si no)
+rendimiento = np.copy(datos[:,0])
+acidez = datos[:,1]
+datos[:,0] = acidez
+datos[:,1] = rendimiento
+
 print(datos)
 df = DataFrame(datos)
 #df.to_csv('datos_aceituna_gilena.csv')
@@ -52,7 +59,7 @@ def datosY (conjunto):
     df = DataFrame(conjunto)
     aux = []
     for i in range (len(conjunto)-1):
-        aux.append(df[1][i+1])
+        aux.append(df[0][i+1])
     return np.array(aux)
 
 tamaño_entrenamiento = int(len(conjunto) * 0.67)
@@ -104,17 +111,17 @@ testY = testY.reshape((len(testY), 1))
 
 #2 Concatenar
 #La primera línea es para el caso de predecir rendimiento y la segunda para la acidez
-#concatenado_entrenamiento_real = concatenate((entrenamientoY, entrenamientoX[:, 1:]), axis=1)
-concatenado_entrenamiento_real = concatenate((entrenamientoX[:,0:1], entrenamientoY), axis=1)
+concatenado_entrenamiento_real = concatenate((entrenamientoY, entrenamientoX[:, 1:]), axis=1)
+#concatenado_entrenamiento_real = concatenate((entrenamientoX[:,0:1], entrenamientoY), axis=1)
 
-#concatenado_entrenamiento_prediccion = concatenate((prediccion_entrenamiento, entrenamientoX[:, 1:]), axis=1)
-concatenado_entrenamiento_prediccion = concatenate((entrenamientoX[:,0:1], prediccion_entrenamiento), axis=1)
+concatenado_entrenamiento_prediccion = concatenate((prediccion_entrenamiento, entrenamientoX[:, 1:]), axis=1)
+#concatenado_entrenamiento_prediccion = concatenate((entrenamientoX[:,0:1], prediccion_entrenamiento), axis=1)
 
-#concatenado_test_real = concatenate((testY, testX[:, 1:]), axis=1)
-concatenado_test_real = concatenate((testX[:, 0:1],testY), axis=1)
+concatenado_test_real = concatenate((testY, testX[:, 1:]), axis=1)
+#concatenado_test_real = concatenate((testX[:, 0:1],testY), axis=1)
 
-#concatenado_test_prediccion = concatenate((prediccion_test, testX[:, 1:]), axis=1)
-concatenado_test_prediccion = concatenate((testX[:, 0:1], prediccion_test), axis=1)
+concatenado_test_prediccion = concatenate((prediccion_test, testX[:, 1:]), axis=1)
+#concatenado_test_prediccion = concatenate((testX[:, 0:1], prediccion_test), axis=1)
 
 #3 Invertir el normalizado
 inversion_entrenamiento_real = scaler.inverse_transform(concatenado_entrenamiento_real)
@@ -125,17 +132,17 @@ inversion_test_prediccion = scaler.inverse_transform(concatenado_test_prediccion
 #4 Obtener las predicciones invertidas
 #La primera línea es para el caso de predecir rendimiento y la segunda para la acidez
 
-#datos_real_entrenamiento = inversion_entrenamiento_real[:, 0]
-datos_real_entrenamiento = inversion_entrenamiento_real[:, 1]
+datos_real_entrenamiento = inversion_entrenamiento_real[:, 0]
+#datos_real_entrenamiento = inversion_entrenamiento_real[:, 1]
 
-#datos_prediccion_entrenamiento = inversion_entrenamiento_prediccion[:, 0]
-datos_prediccion_entrenamiento = inversion_entrenamiento_prediccion[:, 1]
+datos_prediccion_entrenamiento = inversion_entrenamiento_prediccion[:, 0]
+#datos_prediccion_entrenamiento = inversion_entrenamiento_prediccion[:, 1]
 
-#datos_real_test = inversion_test_real[:, 0]
-datos_real_test = inversion_test_real[:, 1]
+datos_real_test = inversion_test_real[:, 0]
+#datos_real_test = inversion_test_real[:, 1]
 
-#datos_prediccion_test = inversion_test_prediccion[:, 0]
-datos_prediccion_test = inversion_test_prediccion[:, 1]
+datos_prediccion_test = inversion_test_prediccion[:, 0]
+#datos_prediccion_test = inversion_test_prediccion[:, 1]
 
 
 
