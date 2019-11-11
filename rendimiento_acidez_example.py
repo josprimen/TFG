@@ -46,6 +46,7 @@ pyplot.show()
 scaler = MinMaxScaler(feature_range=(0, 1))
 conjunto = scaler.fit_transform(datos)
 
+print(conjunto)
 
 def datosX (conjunto):
     df = DataFrame(conjunto)
@@ -86,7 +87,7 @@ model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
 # fit network
-history = model.fit(entrenamientoX, entrenamientoY, epochs=25, batch_size=72, validation_data=(testX, testY), verbose=2, shuffle=False)
+history = model.fit(entrenamientoX, entrenamientoY, epochs=25, validation_data=(testX, testY), verbose=2)
 # plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')
@@ -96,68 +97,60 @@ pyplot.show()
 
 #Hacer predicciones
 prediccion_entrenamiento = model.predict(entrenamientoX)
-print('DATO prediccion_entrenamiento')
-print(prediccion_entrenamiento)
+#print('DATO prediccion_entrenamiento')
+#print(prediccion_entrenamiento)
 prediccion_test = model.predict(testX)
 print('DATO prediccion_test')
 print(prediccion_test)
 
 #Invertir el normalizado para tener los datos en la escala original
 #1 Hacer el array del mismo tamaño que el de la salida para poder concatenar
-entrenamientoX = entrenamientoX.reshape((entrenamientoX.shape[0], entrenamientoX.shape[2]))
-entrenamientoY = entrenamientoY.reshape((len(entrenamientoY), 1))
+#entrenamientoX = entrenamientoX.reshape((entrenamientoX.shape[0], entrenamientoX.shape[2]))
+#entrenamientoY = entrenamientoY.reshape((len(entrenamientoY), 1))
 testX = testX.reshape((testX.shape[0], testX.shape[2]))
 testY = testY.reshape((len(testY), 1))
 
 #2 Concatenar
-#La primera línea es para el caso de predecir rendimiento y la segunda para la acidez
-concatenado_entrenamiento_real = concatenate((entrenamientoY, entrenamientoX[:, 1:]), axis=1)
-#concatenado_entrenamiento_real = concatenate((entrenamientoX[:,0:1], entrenamientoY), axis=1)
-
-concatenado_entrenamiento_prediccion = concatenate((prediccion_entrenamiento, entrenamientoX[:, 1:]), axis=1)
-#concatenado_entrenamiento_prediccion = concatenate((entrenamientoX[:,0:1], prediccion_entrenamiento), axis=1)
-
+#concatenado_entrenamiento_real = concatenate((entrenamientoY, entrenamientoX[:, 1:]), axis=1)
+#concatenado_entrenamiento_prediccion = concatenate((prediccion_entrenamiento, entrenamientoX[:, 1:]), axis=1)
 concatenado_test_real = concatenate((testY, testX[:, 1:]), axis=1)
-#concatenado_test_real = concatenate((testX[:, 0:1],testY), axis=1)
-
 concatenado_test_prediccion = concatenate((prediccion_test, testX[:, 1:]), axis=1)
-#concatenado_test_prediccion = concatenate((testX[:, 0:1], prediccion_test), axis=1)
 
 #3 Invertir el normalizado
-inversion_entrenamiento_real = scaler.inverse_transform(concatenado_entrenamiento_real)
-inversion_entrenamiento_prediccion = scaler.inverse_transform(concatenado_entrenamiento_prediccion)
+#inversion_entrenamiento_real = scaler.inverse_transform(concatenado_entrenamiento_real)
+#inversion_entrenamiento_prediccion = scaler.inverse_transform(concatenado_entrenamiento_prediccion)
 inversion_test_real = scaler.inverse_transform(concatenado_test_real)
 inversion_test_prediccion = scaler.inverse_transform(concatenado_test_prediccion)
 
 #4 Obtener las predicciones invertidas
 #La primera línea es para el caso de predecir rendimiento y la segunda para la acidez
 
-datos_real_entrenamiento = inversion_entrenamiento_real[:, 0]
-#datos_real_entrenamiento = inversion_entrenamiento_real[:, 1]
+#datos_real_entrenamiento = inversion_entrenamiento_real[:, 0]
 
-datos_prediccion_entrenamiento = inversion_entrenamiento_prediccion[:, 0]
-#datos_prediccion_entrenamiento = inversion_entrenamiento_prediccion[:, 1]
+#datos_prediccion_entrenamiento = inversion_entrenamiento_prediccion[:, 0]
 
 datos_real_test = inversion_test_real[:, 0]
-#datos_real_test = inversion_test_real[:, 1]
+print('Datos acidez test')
+print(datos_real_test)
 
 datos_prediccion_test = inversion_test_prediccion[:, 0]
-#datos_prediccion_test = inversion_test_prediccion[:, 1]
+print('datos prediccion test')
+print(datos_prediccion_test)
 
 
 
 
 #Calcular el error cuadrático medio
-trainScore = sqrt(mean_squared_error(datos_real_entrenamiento, datos_prediccion_entrenamiento))
+#trainScore = sqrt(mean_squared_error(datos_real_entrenamiento, datos_prediccion_entrenamiento))
 testScore = sqrt(mean_squared_error(datos_real_test, datos_prediccion_test))
-print('Train Score: %.2f RMSE' % (trainScore))
+#print('Train Score: %.2f RMSE' % (trainScore))
 print('Test Score: %.2f RMSE' % (testScore))
 
 
 
 
-
-results = [[datos_real_entrenamiento, datos_prediccion_entrenamiento], [datos_real_test, datos_prediccion_test]]
+#[datos_real_entrenamiento, datos_prediccion_entrenamiento],
+results = [[datos_real_test, datos_prediccion_test]]
 aux = 1
 pyplot.figure()
 for result in results:
