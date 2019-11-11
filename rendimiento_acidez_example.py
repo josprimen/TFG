@@ -96,7 +96,7 @@ pyplot.show()
 
 
 #Hacer predicciones
-prediccion_entrenamiento = model.predict(entrenamientoX)
+#prediccion_entrenamiento = model.predict(entrenamientoX)
 #print('DATO prediccion_entrenamiento')
 #print(prediccion_entrenamiento)
 prediccion_test = model.predict(testX)
@@ -123,7 +123,6 @@ inversion_test_real = scaler.inverse_transform(concatenado_test_real)
 inversion_test_prediccion = scaler.inverse_transform(concatenado_test_prediccion)
 
 #4 Obtener las predicciones invertidas
-#La primera línea es para el caso de predecir rendimiento y la segunda para la acidez
 
 #datos_real_entrenamiento = inversion_entrenamiento_real[:, 0]
 
@@ -160,23 +159,3 @@ for result in results:
     aux = aux+1
 
 pyplot.show()
-
-
-'''
-Probar a hacer una gráfica con las dos partes reales (entrenamiento y test) y compararla con los datos completos del datos ACIDEZ
-
-paso_atras = 1
-# shift train predictions for plotting
-trainPredictPlot = np.empty_like(conjunto)
-trainPredictPlot[:, :] = np.nan
-trainPredictPlot[paso_atras:len(datos_prediccion_entrenamiento)+paso_atras, :] = datos_prediccion_entrenamiento
-# shift test predictions for plotting
-testPredictPlot = np.empty_like(conjunto)
-testPredictPlot[:, :] = np.nan
-testPredictPlot[len(datos_prediccion_entrenamiento)+(paso_atras*2)+1:len(conjunto)-1, :] = datos_prediccion_entrenamiento
-# plot baseline and predictions
-pyplot.plot(scaler.inverse_transform(conjunto))
-pyplot.plot(trainPredictPlot)
-pyplot.plot(testPredictPlot)
-pyplot.show()
-'''
