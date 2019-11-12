@@ -17,13 +17,13 @@ from keras.layers import LSTM
 
 datos=read_csv('datos_aceituna_gilena.csv', usecols=[3,5], engine='python')
 datos = datos.values
-
+'''
 #PARA HACER UNA PREDICCION DE LA ACIDEZ CAMBIAMOS LAS COLUMNAS DE POSICION (Hay que usar una copia, las asignaciones cambian si no)
 rendimiento = np.copy(datos[:,0])
 acidez = datos[:,1]
 datos[:,0] = acidez
 datos[:,1] = rendimiento
-
+'''
 print(datos)
 df = DataFrame(datos)
 #df.to_csv('datos_aceituna_gilena.csv')
