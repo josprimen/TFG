@@ -16,14 +16,16 @@ from keras.layers import Dense
 from keras.layers import LSTM
 
 
-df = pandas.read_json('datos_clima.json')
-df.to_csv('datos_climatologia.csv')
+df = pandas.read_json('datos_clima_2018.json')
+df.to_csv('datos_climatologia_2018.csv')
 
-datos=read_csv('datos_climatologia.csv', usecols=[11, 17], engine='python')
+datos=read_csv('datos_climatologia_2018.csv', usecols=[11, 17], engine='python')
+#datos.fillna('0,0', inplace=True)
 datos = datos.values
 df = DataFrame(datos)
-#df.to_csv('datos_clima_abril_mayo.csv')
+#df.to_csv('datos_clima_abril_mayo_2014.csv')
 #Los datos son de tipo String al venir de un JSON, modificamos la coma por un punto en el csv con ctrl+r
+#errata 03/05/2016 la roda de andalucia        2017-04-11
 
 aux = []
 aux2 = []
@@ -54,4 +56,4 @@ datos[:,1] = aux2
 copia = np.copy(datos)
 copia = copia.astype('float32')
 copiadf = DataFrame(copia)
-copiadf.to_csv('datos_clima_abril_mayo.csv')
+copiadf.to_csv('datos_clima_abril_mayo_2018.csv')

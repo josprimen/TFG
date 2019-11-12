@@ -38,15 +38,19 @@ fecha = str(dia) + barra + str(mes)
 datos=read_csv('datos_aceituna_gilena.csv', usecols=[0,5], engine='python')
 datoss = datos.values
 meses = ['11','12']
-
+dias = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30']
 suma = []
 
 for mes in meses:
-    for i in range(1, 31):
+    for dia in dias:
         media_dia = 0
-        print(str(i)+'/'+mes)
+        #print(str(i)+'/'+mes)
         for d in datoss:
-            if d[0].__contains__(str(i)+'/'+mes):
+            if (dia+'/'+mes) in d[0]:
+            #if d[0].__contains__(str(i)+'/'+mes):
                 print('Fecha: ' + d[0] + ' Acidez: ' + str(d[1]))
                 media_dia = media_dia + d[1]
         suma.append(media_dia)
+
+print('Suma: ')
+print(suma)
