@@ -130,15 +130,19 @@ pyplot.show()
 
 suma2015df = DataFrame(suma2015)
 suma2015df = suma2015df.loc[~(suma2015df==0).all(axis=1)]
+suma2015df.to_csv('media_acidez_dias_2015.csv')
 suma2015df = suma2015df.values
 suma2016df = DataFrame(suma2016)
 suma2016df = suma2016df.loc[~(suma2016df==0).all(axis=1)]
+suma2016df.to_csv('media_acidez_dias_2016.csv')
 suma2016df = suma2016df.values
 suma2017df = DataFrame(suma2017)
 suma2017df = suma2017df.loc[~(suma2017df==0).all(axis=1)]
+suma2017df.to_csv('media_acidez_dias_2017.csv')
 suma2017df = suma2017df.values
 suma2018df = DataFrame(suma2018)
 suma2018df = suma2018df.loc[~(suma2018df==0).all(axis=1)]
+suma2018df.to_csv('media_acidez_dias_2018.csv')
 suma2018df = suma2018df.values
 
 
