@@ -17,8 +17,8 @@ from keras.layers import LSTM
 
 datos=read_csv('datos_aceituna_gilena.csv', usecols=[0,5], engine='python')
 datoss = datos.values
-anyos= ['2015', '2016', '2017', '2018']
-meses = ['11','12']
+anyos= ['2015', '2016', '2017', '2018', '2019']
+meses = ['01','11','12']
 dias = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30']
 suma2015 = []
 suma2016 = []
@@ -45,20 +45,45 @@ for anyo in anyos:
                 else:
                     suma2015.append(media_dia/numero_almazaras)
             if anyo == '2016':
-                if numero_almazaras==0:
-                    suma2016.append(media_dia)
-                else:
-                    suma2016.append(media_dia/numero_almazaras)
+                if mes in ['11','12']:
+                    if numero_almazaras==0:
+                        suma2016.append(media_dia)
+                    else:
+                        suma2016.append(media_dia/numero_almazaras)
+                if mes in ['01']:
+                    if numero_almazaras==0:
+                        suma2015.append(media_dia)
+                    else:
+                        suma2015.append(media_dia/numero_almazaras)
             if anyo == '2017':
-                if numero_almazaras==0:
-                    suma2017.append(media_dia)
-                else:
-                    suma2017.append(media_dia/numero_almazaras)
+                if mes in ['11','12']:
+                    if numero_almazaras==0:
+                        suma2017.append(media_dia)
+                    else:
+                        suma2017.append(media_dia/numero_almazaras)
+                if mes in ['01']:
+                    if numero_almazaras==0:
+                        suma2016.append(media_dia)
+                    else:
+                        suma2016.append(media_dia/numero_almazaras)
             if anyo == '2018':
-                if numero_almazaras==0:
-                    suma2018.append(media_dia)
-                else:
-                    suma2018.append(media_dia/numero_almazaras)
+                if mes in ['11', '12']:
+                    if numero_almazaras==0:
+                        suma2018.append(media_dia)
+                    else:
+                        suma2018.append(media_dia/numero_almazaras)
+                if mes in ['01']:
+                    if numero_almazaras==0:
+                        suma2017.append(media_dia)
+                    else:
+                        suma2017.append(media_dia/numero_almazaras)
+            if anyo == '2019':
+                if mes == '01':
+                    if numero_almazaras==0:
+                        suma2018.append(media_dia)
+                    else:
+                        suma2018.append(media_dia/numero_almazaras)
+
 
 
 print('Suma All: ')
@@ -102,21 +127,54 @@ for result in suma_anyos:
 
 pyplot.show()
 
+
 suma2015df = DataFrame(suma2015)
 suma2015df = suma2015df.loc[~(suma2015df==0).all(axis=1)]
+suma2015df = suma2015df.values
 suma2016df = DataFrame(suma2016)
 suma2016df = suma2016df.loc[~(suma2016df==0).all(axis=1)]
+suma2016df = suma2016df.values
 suma2017df = DataFrame(suma2017)
 suma2017df = suma2017df.loc[~(suma2017df==0).all(axis=1)]
+suma2017df = suma2017df.values
 suma2018df = DataFrame(suma2018)
 suma2018df = suma2018df.loc[~(suma2018df==0).all(axis=1)]
+suma2018df = suma2018df.values
+
+
+
+print('Suma 2015 Drop zeros: ')
+print(suma2015df)
+print('len')
+print(len(suma2015df))
+print('\n')
+
+print('Suma 2016 Drop zeros: ')
+print(suma2016df)
+print('len')
+print(len(suma2016df))
+print('\n')
+
+print('Suma 2017 Drop zeros: ')
+print(suma2017df)
+print('len')
+print(len(suma2017df))
+print('\n')
+
+print('Suma 2018 Drop zeros: ')
+print(suma2018df)
+print('len')
+print(len(suma2018df))
+print('\n')
+
+
 
 suma_anyos_df = [suma2015df, suma2016df, suma2017df, suma2018df]
 aux = 1
 pyplot.figure()
 for result in suma_anyos_df:
     pyplot.subplot(4, 1, aux)
-    pyplot.plot(result.values)
+    pyplot.plot(result)
     aux = aux+1
 
 pyplot.show()
