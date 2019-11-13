@@ -29,60 +29,60 @@ sumaall = []
 for anyo in anyos:
     for mes in meses:
         for dia in dias:
-            media_dia = 0
-            numero_almazaras = 0
+            suma_dia = 0
+            numero_albaran = 0
             #print(str(i)+'/'+mes)
             for d in datoss:
                 if (dia+'/'+mes+'/'+anyo) in d[0]:
                 #if d[0].__contains__(str(i)+'/'+mes):
                     print('Fecha: ' + d[0] + ' Acidez: ' + str(d[1]))
-                    media_dia = media_dia + d[1]
-                    numero_almazaras = numero_almazaras +1
-            sumaall.append(media_dia)
+                    suma_dia = suma_dia + d[1]
+                    numero_albaran = numero_albaran +1
+            sumaall.append(suma_dia)
             if anyo == '2015':
-                if numero_almazaras==0:
-                    suma2015.append(media_dia)
+                if numero_albaran==0:
+                    suma2015.append(suma_dia)
                 else:
-                    suma2015.append(media_dia/numero_almazaras)
+                    suma2015.append(suma_dia/numero_albaran)
             if anyo == '2016':
                 if mes in ['11','12']:
-                    if numero_almazaras==0:
-                        suma2016.append(media_dia)
+                    if numero_albaran==0:
+                        suma2016.append(suma_dia)
                     else:
-                        suma2016.append(media_dia/numero_almazaras)
+                        suma2016.append(suma_dia/numero_albaran)
                 if mes in ['01']:
-                    if numero_almazaras==0:
-                        suma2015.append(media_dia)
+                    if numero_albaran==0:
+                        suma2015.append(suma_dia)
                     else:
-                        suma2015.append(media_dia/numero_almazaras)
+                        suma2015.append(suma_dia/numero_albaran)
             if anyo == '2017':
                 if mes in ['11','12']:
-                    if numero_almazaras==0:
-                        suma2017.append(media_dia)
+                    if numero_albaran==0:
+                        suma2017.append(suma_dia)
                     else:
-                        suma2017.append(media_dia/numero_almazaras)
+                        suma2017.append(suma_dia/numero_albaran)
                 if mes in ['01']:
-                    if numero_almazaras==0:
-                        suma2016.append(media_dia)
+                    if numero_albaran==0:
+                        suma2016.append(suma_dia)
                     else:
-                        suma2016.append(media_dia/numero_almazaras)
+                        suma2016.append(suma_dia/numero_albaran)
             if anyo == '2018':
                 if mes in ['11', '12']:
-                    if numero_almazaras==0:
-                        suma2018.append(media_dia)
+                    if numero_albaran==0:
+                        suma2018.append(suma_dia)
                     else:
-                        suma2018.append(media_dia/numero_almazaras)
+                        suma2018.append(suma_dia/numero_albaran)
                 if mes in ['01']:
-                    if numero_almazaras==0:
-                        suma2017.append(media_dia)
+                    if numero_albaran==0:
+                        suma2017.append(suma_dia)
                     else:
-                        suma2017.append(media_dia/numero_almazaras)
+                        suma2017.append(suma_dia/numero_albaran)
             if anyo == '2019':
                 if mes == '01':
-                    if numero_almazaras==0:
-                        suma2018.append(media_dia)
+                    if numero_albaran==0:
+                        suma2018.append(suma_dia)
                     else:
-                        suma2018.append(media_dia/numero_almazaras)
+                        suma2018.append(suma_dia/numero_albaran)
 
 
 
