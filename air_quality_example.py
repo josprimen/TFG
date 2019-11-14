@@ -69,6 +69,9 @@ numero_horas_entrenamiento = 365*24
 test = datos_normalizados[:numero_horas_entrenamiento, :]
 entrenamiento = datos_normalizados[numero_horas_entrenamiento:, :]
 
+print('Conjunto de entrenamiento')
+print(entrenamiento)
+
 entrenamientoX, entrenamientoY = datosX(entrenamiento), datosY(entrenamiento)
 testX, testY = datosX(test), datosY(test)
 
