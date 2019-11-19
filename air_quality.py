@@ -124,11 +124,11 @@ print(reframed.head())
 values = reframed.values
 print('casi final ')
 print(values)
-n_train_hours = 365 * 24
-#train = values[:n_train_hours, :]
-#test = values[n_train_hours:, :]
-test = values[:n_train_hours, :]
-train = values[n_train_hours:, :]
+n_train_hours = (365*4) * 24
+train = values[:n_train_hours, :]
+test = values[n_train_hours:, :]
+#test = values[:n_train_hours, :]
+#train = values[n_train_hours:, :]
 # split into input and outputs
 train_X, train_y = train[:, :-1], train[:, -1]
 test_X, test_y = test[:, :-1], test[:, -1]
@@ -161,7 +161,7 @@ model.add(LSTM(50, input_shape=(train_X.shape[1], train_X.shape[2])))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 # fit network
-history = model.fit(train_X, train_y, epochs=100, batch_size=72, validation_data=(test_X, test_y), verbose=2, shuffle=False)
+history = model.fit(train_X, train_y, epochs=50, batch_size=72, validation_data=(test_X, test_y), verbose=2, shuffle=False)
 # plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')

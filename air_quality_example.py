@@ -62,12 +62,12 @@ def datosY (conjunto):
     return np.array(aux)
 
 #Un año de entrenamiento
-numero_horas_entrenamiento = 365*24
-#entrenamiento = datos_normalizados[:numero_horas_entrenamiento, :]
-#test = datos_normalizados[numero_horas_entrenamiento:, :]
+numero_horas_entrenamiento = 1460*24
+entrenamiento = datos_normalizados[:numero_horas_entrenamiento, :]
+test = datos_normalizados[numero_horas_entrenamiento:, :]
 
-test = datos_normalizados[:numero_horas_entrenamiento, :]
-entrenamiento = datos_normalizados[numero_horas_entrenamiento:, :]
+#test = datos_normalizados[:numero_horas_entrenamiento, :]
+#entrenamiento = datos_normalizados[numero_horas_entrenamiento:, :]
 
 print('Conjunto de entrenamiento')
 print(entrenamiento)

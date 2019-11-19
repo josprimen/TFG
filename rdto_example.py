@@ -14,8 +14,11 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 
+#PARA USAR LOS DATOS DE TALARRUBIAS
+#datos=read_csv('datos_aceituna_tratados.csv', usecols=[1], engine='python')
+#PARA USAR LOS DATOS DE GILENA
+datos=read_csv('datos_rendimiento_suma_dias.csv', usecols=[1], engine='python')
 
-datos=read_csv('datos_aceituna_tratados.csv', usecols=[1], engine='python')
 datos = datos.values
 datos = datos.astype('float32')
 df = DataFrame(datos)

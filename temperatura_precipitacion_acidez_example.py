@@ -108,7 +108,7 @@ def datosY (conjunto):
     return np.array(aux)
 
 
-tamaño_entrenamiento = int(len(conjunto_normalizado) * 0.67)
+tamaño_entrenamiento = int(len(conjunto_normalizado) * 0.75)
 tamaño_test = len(conjunto_normalizado) - tamaño_entrenamiento
 entrenamiento = conjunto_normalizado[0:tamaño_entrenamiento]
 test = conjunto_normalizado[tamaño_entrenamiento:len(conjunto_normalizado)]
@@ -149,7 +149,7 @@ model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
 # fit network
-history = model.fit(entrenamientoX, entrenamientoY, epochs=12, validation_data=(testX, testY), verbose=2)
+history = model.fit(entrenamientoX, entrenamientoY, epochs=25, validation_data=(testX, testY), verbose=2)
 # plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')
