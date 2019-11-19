@@ -15,8 +15,16 @@ from keras.layers import Dense
 from keras.layers import LSTM
 
 
-datos=read_csv('datos_aceituna_gilena.csv', usecols=[0,5], engine='python')
+datos=read_csv('datos_aceituna_gilena.csv', usecols=[0,2,5], engine='python')
 datoss = datos.values
+
+#Normalizar los datos de kilogramos para usarlo en la media ponderada
+kilos = read_csv('datos_aceituna_gilena.csv', usecols=[2], engine='python')
+kilos = kilos.values
+minmax = MinMaxScaler(feature_range=(0,1))
+kilos_normalizados = minmax.fit_transform(kilos)
+datoss[:,1] = kilos_normalizados[:,0]
+
 anyos= ['2015', '2016', '2017', '2018', '2019']
 meses = ['01','11','12']
 dias = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30']
@@ -36,7 +44,7 @@ for anyo in anyos:
                 if (dia+'/'+mes+'/'+anyo) in d[0]:
                 #if d[0].__contains__(str(i)+'/'+mes):
                     print('Fecha: ' + d[0] + ' Acidez: ' + str(d[1]))
-                    suma_dia = suma_dia + d[1]
+                    suma_dia = suma_dia + d[1]*d[2]
                     numero_albaran = numero_albaran +1
             sumaall.append(suma_dia)
             if anyo == '2015':
