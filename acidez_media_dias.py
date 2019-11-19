@@ -43,7 +43,7 @@ for anyo in anyos:
             for d in datoss:
                 if (dia+'/'+mes+'/'+anyo) in d[0]:
                 #if d[0].__contains__(str(i)+'/'+mes):
-                    print('Fecha: ' + d[0] + ' Acidez: ' + str(d[1]))
+                    print('Fecha: ' + d[0] + ' Acidez: ' + str(d[2]))
                     suma_dia = suma_dia + d[1]*d[2]
                     numero_albaran = numero_albaran +1
             sumaall.append(suma_dia)
