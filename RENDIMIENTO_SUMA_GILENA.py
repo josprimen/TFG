@@ -1,4 +1,4 @@
-import numpy as np
+'''import numpy as np
 import math
 from pandas import read_csv
 from datetime import datetime
@@ -267,14 +267,15 @@ from sklearn.metrics import mean_squared_error
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
+from keras.callbacks import EarlyStopping
 
 
 
 
 
-datos=read_csv('/content/sample_data/datos_aceituna_gilena.csv', usecols=[0,2,3], engine='python')
+datos=read_csv('datos_aceituna_gilena.csv', usecols=[0,2,3], engine='python')
 datoss = datos.values
-kilos = read_csv('/content/sample_data/datos_aceituna_gilena.csv', usecols=[2], engine='python')
+kilos = read_csv('datos_aceituna_gilena.csv', usecols=[2], engine='python')
 kilos = kilos.values
 #MOD? RANGO DE 1 A 2
 minmax = MinMaxScaler(feature_range=(0,1))
@@ -484,7 +485,9 @@ model.add(LSTM(4, input_shape=(1, paso_atras)))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
-history = model.fit(entrenamientoX, entrenamientoY, epochs=25, validation_split=0.3, batch_size=1, verbose=2)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5, min_delta=0.001)
+
+history = model.fit(entrenamientoX, entrenamientoY, epochs=50, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
 
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')
@@ -517,4 +520,3 @@ pyplot.plot(trainPredictPlot)
 pyplot.plot(testPredictPlot)
 pyplot.show()
 
-'''
