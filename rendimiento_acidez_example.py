@@ -15,8 +15,13 @@ from keras.layers import Dense
 from keras.layers import LSTM
 
 
-datos=read_csv('datos_aceituna_gilena.csv', usecols=[3,5], engine='python')
-datos = datos.values
+#datos=read_csv('datos_aceituna_gilena.csv', usecols=[3,5], engine='python')
+#datos = datos.values
+
+rendimientocsv = read_csv('csv_media_ponderada_rendimiento.csv', usecols=[1], engine='python')
+acidezcsv = read_csv('csv_media_ponderada_acidez.csv', usecols=[1], engine='python')
+datos = concatenate((acidezcsv, rendimientocsv), axis=1)
+
 '''
 #PARA HACER UNA PREDICCION DE LA ACIDEZ CAMBIAMOS LAS COLUMNAS DE POSICION (Hay que usar una copia, las asignaciones cambian si no)
 rendimiento = np.copy(datos[:,0])
@@ -24,6 +29,7 @@ acidez = datos[:,1]
 datos[:,0] = acidez
 datos[:,1] = rendimiento
 '''
+
 print(datos)
 df = DataFrame(datos)
 #df.to_csv('datos_aceituna_gilena.csv')
@@ -87,7 +93,7 @@ model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
 # fit network
-history = model.fit(entrenamientoX, entrenamientoY, epochs=25, validation_data=(testX, testY), verbose=2)
+history = model.fit(entrenamientoX, entrenamientoY, epochs=50, validation_data=(testX, testY), verbose=2)
 # plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')

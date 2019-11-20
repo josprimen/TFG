@@ -444,7 +444,8 @@ print('Datos rendimiento:')
 print(datos_rendimiento)
 
 
-
+csv_media_ponderada_rendimiento = DataFrame(datos_rendimiento)
+csv_media_ponderada_rendimiento.to_csv('csv_media_ponderada_rendimiento.csv')
 datos = datos_rendimiento
 
 pyplot.plot(datos[:])
