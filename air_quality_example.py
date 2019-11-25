@@ -13,13 +13,15 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 
+#Set random seed to make initial weights static.
+np.random.seed(7)
 
 datos = read_csv('raw.csv', usecols=[5, 6, 7, 8, 9, 10, 11, 12], engine='python')
 datos['pm2.5'].fillna(0, inplace=True)
 datos = datos[24:]
 #datos.to_csv('datosmios.csv')
 groups = [0, 1, 2, 3, 5, 6, 7]
-
+columns = ['pollution', 'dew', 'temp', 'press', 'wnd_spd', 'snow', 'rain']
 datoss = datos.values
 
 #Imprimimos una gráfica con los datos por pantalla (cada tipo de dato en un subgráfico)
@@ -28,6 +30,8 @@ pyplot.figure()
 for group in groups:
     pyplot.subplot(7, 1, aux)
     pyplot.plot(datoss[:, group])
+    pyplot.title(columns[aux-1], y=0.5, loc='right')
+
     aux = aux+1
 
 pyplot.show()
@@ -46,12 +50,15 @@ datos_normalizados = scaler.fit_transform(datoss)
 #len(df[0])
 #print('df[0][0]')
 
-def datosX (conjunto):
+def datosX (conjunto, features):
     df = DataFrame(conjunto)
     aux = []
     for i in range (len(conjunto)-1):
-        a = [[df[0][i], df[1][i], df[2][i], df[3][i], df[4][i], df[5][i], df[6][i], df[7][i]]]
-        aux.append(a)
+        a = []
+        for n in range (features):
+            a.append(df[n][i])
+        print(a)
+        aux.append([a])
     return np.array(aux)
 
 def datosY (conjunto):
@@ -62,7 +69,7 @@ def datosY (conjunto):
     return np.array(aux)
 
 #Un año de entrenamiento
-numero_horas_entrenamiento = 1460*24
+numero_horas_entrenamiento = 365*24
 entrenamiento = datos_normalizados[:numero_horas_entrenamiento, :]
 test = datos_normalizados[numero_horas_entrenamiento:, :]
 
@@ -72,17 +79,22 @@ test = datos_normalizados[numero_horas_entrenamiento:, :]
 print('Conjunto de entrenamiento')
 print(entrenamiento)
 
-entrenamientoX, entrenamientoY = datosX(entrenamiento), datosY(entrenamiento)
-testX, testY = datosX(test), datosY(test)
+features = 8
+entrenamientoX, entrenamientoY = datosX(entrenamiento, features), datosY(entrenamiento)
+testX, testY = datosX(test, features), datosY(test)
 
 print('DATOS entrenamientoX')
 print(entrenamientoX)
+print(len(entrenamientoX))
 print('DATOS entrenamientoY')
 print(entrenamientoY)
+print(len(entrenamientoY))
 print('DATOS testX')
 print(testX)
+print(len(testX))
 print('DATOS testY')
 print(testY)
+print(len(testY))
 
 
 model = Sequential()
@@ -91,7 +103,7 @@ model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
 # fit network
-history = model.fit(entrenamientoX, entrenamientoY, epochs=25, batch_size=72, validation_data=(testX, testY), verbose=2, shuffle=False)
+history = model.fit(entrenamientoX, entrenamientoY, epochs=50, batch_size=72, validation_data=(testX, testY), verbose=2, shuffle=False)
 # plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')
