@@ -61,7 +61,7 @@ def dataY (dataset):
 
 #Split into train and test sets
 training_set_hours = 365*24
-train = normalize_data[:training_set_hours+1, :]
+train = normalize_data[:training_set_hours, :]
 test = normalize_data[training_set_hours:, :]
 trainX, trainY = dataX(train, features), dataY(train)
 testX, testY = dataX(test, features), dataY(test)
