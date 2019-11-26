@@ -42,7 +42,6 @@ scaler = MinMaxScaler(feature_range=(0, 1))
 normalize_data = scaler.fit_transform(dataset)
 
 #Define a function to format the dataset
-
 def dataX (dataset, features):
     df = DataFrame(dataset)
     aux = []
