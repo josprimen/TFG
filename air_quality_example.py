@@ -17,7 +17,6 @@ from keras.layers import LSTM
 np.random.seed(7)
 
 #Load and represent the dataset
-
 data = read_csv('raw.csv', usecols=[5, 6, 7, 8, 9, 10, 11, 12], engine='python')
 data['pm2.5'].fillna(0, inplace=True)
 data = data[24:]
