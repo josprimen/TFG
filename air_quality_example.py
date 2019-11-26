@@ -21,16 +21,16 @@ data = read_csv('raw.csv', usecols=[5, 6, 7, 8, 9, 10, 11, 12], engine='python')
 data['pm2.5'].fillna(0, inplace=True)
 data = data[24:]
 groups = [0, 1, 2, 3, 5, 6, 7]
-#columns = ['pollution', 'dew', 'temp', 'press', 'wnd_spd', 'snow', 'rain']
+columns = ['pollution', 'dew', 'temp', 'press', 'wnd_spd', 'snow', 'rain']
 dataset = data.values
 features = 8
 
 aux = 1
 pyplot.figure()
 for group in groups:
-    pyplot.subplot(7, 1, aux)
+    pyplot.subplot(features, 1, aux)
     pyplot.plot(dataset[:, group])
-    #pyplot.title(columns[aux-1], y=0.5, loc='right')
+    pyplot.title(columns[aux-1], y=0.5, loc='right')
     aux = aux+1
 pyplot.show()
 
@@ -49,7 +49,6 @@ def dataX (dataset, features):
         a = []
         for n in range (features):
             a.append(df[n][i])
-        print(a)
         aux.append([a])
     return np.array(aux)
 
@@ -62,7 +61,7 @@ def dataY (dataset):
 
 #Split into train and test sets
 training_set_hours = 365*24
-train = normalize_data[:training_set_hours, :]
+train = normalize_data[:training_set_hours+1, :]
 test = normalize_data[training_set_hours:, :]
 trainX, trainY = dataX(train, features), dataY(train)
 testX, testY = dataX(test, features), dataY(test)
