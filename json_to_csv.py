@@ -20,8 +20,8 @@ years = ['2015', '2016', '2017', '2018']
 for year in years:
     df = pandas.read_json('datos_clima_'+year+'.json')
     df.to_csv('datos_climatologia_'+year+'.csv')
-
     data = read_csv('datos_climatologia_'+year+'.csv', usecols=[11, 17], engine='python')
+    data.fillna('0,0', inplace=True)
     data = data.values
     df = DataFrame(data)
     # df.to_csv('datos_clima_abril_mayo_2014.csv')
@@ -33,20 +33,20 @@ for year in years:
 
     for number in df[0]:
         new = ''
-        for letra in number:
-            if letra == ',':
+        for letter in number:
+            if letter == ',':
                 new = new + '.'
             else:
-                new = new + letra
+                new = new + letter
         aux.append(new)
 
     for number in df[1]:
         new = ''
-        for letra in number:
-            if letra == ',':
+        for letter in number:
+            if letter == ',':
                 new = new + '.'
             else:
-                new = new + letra
+                new = new + letter
         aux2.append(new)
 
     data[:, 0] = aux
