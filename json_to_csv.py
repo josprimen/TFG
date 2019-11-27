@@ -15,45 +15,44 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 
+years = ['2015', '2016', '2017', '2018']
 
-df = pandas.read_json('datos_clima_2018.json')
-df.to_csv('datos_climatologia_2018.csv')
+for year in years:
+    df = pandas.read_json('datos_clima_'+year+'.json')
+    df.to_csv('datos_climatologia_'+year+'.csv')
 
-datos=read_csv('datos_climatologia_2018.csv', usecols=[11, 17], engine='python')
-#datos.fillna('0,0', inplace=True)
-datos = datos.values
-df = DataFrame(datos)
-#df.to_csv('datos_clima_abril_mayo_2014.csv')
-#Los datos son de tipo String al venir de un JSON, modificamos la coma por un punto en el csv con ctrl+r
-#errata 03/05/2016 la roda de andalucia        2017-04-11
+    data = read_csv('datos_climatologia_'+year+'.csv', usecols=[11, 17], engine='python')
+    data = data.values
+    df = DataFrame(data)
+    # df.to_csv('datos_clima_abril_mayo_2014.csv')
+    # Los datos son de tipo String al venir de un JSON, modificamos la coma por un punto en el csv con ctrl+r
+    # errata 03/05/2016 la roda de andalucia        2017-04-11
 
-aux = []
-aux2 = []
+    aux = []
+    aux2 = []
 
-for number in df[0]:
-    new = ''
-    for letra in number:
-        if letra == ',':
-            new = new + '.'
-        else:
-            new = new + letra
-    aux.append(new)
+    for number in df[0]:
+        new = ''
+        for letra in number:
+            if letra == ',':
+                new = new + '.'
+            else:
+                new = new + letra
+        aux.append(new)
 
+    for number in df[1]:
+        new = ''
+        for letra in number:
+            if letra == ',':
+                new = new + '.'
+            else:
+                new = new + letra
+        aux2.append(new)
 
-for number in df[1]:
-    new = ''
-    for letra in number:
-        if letra == ',':
-            new = new + '.'
-        else:
-            new = new + letra
-    aux2.append(new)
+    data[:, 0] = aux
+    data[:, 1] = aux2
 
-
-datos[:,0] = aux
-datos[:,1] = aux2
-
-copia = np.copy(datos)
-copia = copia.astype('float32')
-copiadf = DataFrame(copia)
-copiadf.to_csv('datos_clima_abril_mayo_2018.csv')
+    copy = np.copy(data)
+    copy = copy.astype('float32')
+    copydf = DataFrame(copy)
+    copydf.to_csv('datos_clima_abril_mayo_' + year + '.csv')
