@@ -182,6 +182,8 @@ acidity_data = np.concatenate((sum2015df, sum2016df, sum2017df, sum2018df, sum20
 print('datos acidez:')
 print(acidity_data)
 
+acidity_datadf = DataFrame(acidity_data)
+acidity_datadf.to_csv('csv_media_ponderada_acidez.csv')
 
 #Set random seed to make initial weights static.
 np.random.seed(7)

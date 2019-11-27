@@ -1,4 +1,6 @@
 import numpy as np
+import math
+import matplotlib.pyplot as plt
 from pandas import read_csv
 from datetime import datetime
 from math import sqrt
@@ -12,18 +14,21 @@ from sklearn.metrics import mean_squared_error
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
+from keras.callbacks import EarlyStopping
+
+acidity_data = read_csv('csv_media_ponderada_acidez.csv', usecols=[1], engine='python')
+performance_data = read_csv('csv_media_ponderada_rendimiento.csv', usecols=[1], engine='python')
 
 #Set random seed to make initial weights static.
 np.random.seed(7)
 
 #Load and represent the dataset
-data = read_csv('raw.csv', usecols=[5, 6, 7, 8, 9, 10, 11, 12], engine='python')
-data['pm2.5'].fillna(0, inplace=True)
-data = data[24:]
-groups = [0, 1, 2, 3, 5, 6, 7]
-columns = ['pollution', 'dew', 'temp', 'press', 'wnd_spd', 'snow', 'rain']
-dataset = data.values
-features = 8
+#conjunto = concatenate((performance_data, acidity_data), axis=1)
+dataset = concatenate((acidity_data, performance_data), axis=1)
+groups = [0,1]
+columns = ['Acidez', 'Rendimiento']
+features = 2
+look_back = 1
 
 aux = 1
 pyplot.figure()
@@ -34,9 +39,7 @@ for group in groups:
     aux = aux+1
 pyplot.show()
 
-#Encode and normalize data
-encoder = LabelEncoder()
-dataset[:, 4] = encoder.fit_transform(dataset[:, 4])
+#Normalize data
 dataset = dataset.astype('float32')
 scaler = MinMaxScaler(feature_range=(0, 1))
 normalize_data = scaler.fit_transform(dataset)
@@ -60,9 +63,9 @@ def dataY (dataset):
     return np.array(aux)
 
 #Split into train and test sets
-training_set_hours = 365*24
-train = normalize_data[:training_set_hours, :]
-test = normalize_data[training_set_hours:, :]
+train_size = int(len(dataset) * 0.67)
+train = normalize_data[:train_size, :]
+test = normalize_data[train_size:, :]
 trainX, trainY = dataX(train, features), dataY(train)
 testX, testY = dataX(test, features), dataY(test)
 
@@ -127,3 +130,9 @@ trainScore = sqrt(mean_squared_error(data_real_train, data_prediction_train))
 testScore = sqrt(mean_squared_error(data_real_test, data_prediction_test))
 print('Train Score: %.2f RMSE' % (trainScore))
 print('Test Score: %.2f RMSE' % (testScore))
+
+#Plot baseline and predictions
+data_prediction = concatenate((data_prediction_train, data_prediction_test))
+plt.plot(dataset[:,0])
+plt.plot(data_prediction)
+plt.show()

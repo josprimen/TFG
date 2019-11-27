@@ -182,6 +182,8 @@ performance_data = np.concatenate((sum2015df, sum2016df, sum2017df, sum2018df, s
 print('datos rendimiento:')
 print(performance_data)
 
+performance_datadf = DataFrame(performance_data)
+performance_datadf.to_csv('csv_media_ponderada_rendimiento.csv')
 
 #Set random seed to make initial weights static.
 np.random.seed(7)
