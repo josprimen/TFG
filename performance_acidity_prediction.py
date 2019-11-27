@@ -131,8 +131,18 @@ testScore = sqrt(mean_squared_error(data_real_test, data_prediction_test))
 print('Train Score: %.2f RMSE' % (trainScore))
 print('Test Score: %.2f RMSE' % (testScore))
 
+#Shift train predictions for plotting
+trainPredictPlot = np.empty_like(dataset[:,0])
+trainPredictPlot[:] = np.nan
+trainPredictPlot[:len(data_prediction_train)] = data_prediction_train
+#Shift test predictions for plotting
+testPredictPlot = np.empty_like(dataset[:,0])
+testPredictPlot[:] = np.nan
+testPredictPlot[185:len(dataset)-1] = data_prediction_test
 #Plot baseline and predictions
-data_prediction = concatenate((data_prediction_train, data_prediction_test))
+#data_prediction = concatenate((data_prediction_train, data_prediction_test))
 plt.plot(dataset[:,0])
-plt.plot(data_prediction)
+#plt.plot(data_prediction)
+plt.plot(trainPredictPlot)
+plt.plot(testPredictPlot)
 plt.show()
