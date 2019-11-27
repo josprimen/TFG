@@ -219,7 +219,7 @@ def dataY (dataset, look_back):
     return np.array(aux)
 
 #Format dataset
-look_back = 5 #time steps
+look_back = 1 #time steps
 trainX = dataX(train, look_back)
 trainY = dataY(train, look_back)
 
@@ -243,9 +243,9 @@ model.add(LSTM(4, input_shape=(look_back,1)))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
 
-es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=15, min_delta=0.001)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=20, min_delta=0.001)
 
-history = model.fit(trainX, trainY, epochs=50, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
+history = model.fit(trainX, trainY, epochs=100, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
 
 #Represent loss
 pyplot.plot(history.history['loss'], label='train')

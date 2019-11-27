@@ -205,6 +205,7 @@ datos = datos_acidez
 pyplot.plot(datos[:])
 pyplot.show()
 
+np.random.seed(7)
 
 
 
