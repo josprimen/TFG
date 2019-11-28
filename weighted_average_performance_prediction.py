@@ -38,12 +38,12 @@ sumall = []
 
 #Weigthed average performance (days)
 for year in years:
-    for mes in months:
+    for month in months:
         for day in days:
             sum_day = 0
             delivery_note_number = 0
             for d in dataset:
-                if (day+'/'+mes+'/'+year) in d[0]:
+                if (day+'/'+month+'/'+year) in d[0]:
                     print('Fecha: ' + d[0] + ' Rendimiento: ' + str(d[2]))
                     sum_day = sum_day + d[1]*d[2]
                     delivery_note_number = delivery_note_number +1
