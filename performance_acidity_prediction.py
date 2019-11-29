@@ -16,8 +16,8 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from keras.callbacks import EarlyStopping
 
-acidity_data = read_csv('csv_media_ponderada_acidez.csv', usecols=[1], engine='python')
-performance_data = read_csv('csv_media_ponderada_rendimiento.csv', usecols=[1], engine='python')
+acidity_data = read_csv('files/csv_media_ponderada_acidez.csv', usecols=[1], engine='python')
+performance_data = read_csv('files/csv_media_ponderada_rendimiento.csv', usecols=[1], engine='python')
 
 #Set random seed to make initial weights static.
 np.random.seed(7)

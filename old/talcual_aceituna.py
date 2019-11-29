@@ -16,7 +16,7 @@ from pandas import read_csv
 numpy.random.seed(7)
 
 # load the dataset
-dataframe = read_csv('datos_aceituna_tratados.csv', usecols=[1], engine='python')
+dataframe = read_csv('files/datos_aceituna_tratados.csv', usecols=[1], engine='python')
 dataset = dataframe.values
 dataset = dataset.astype('float32')
 

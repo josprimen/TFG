@@ -15,16 +15,16 @@ from keras.callbacks import EarlyStopping
 
 #format the dataset to STL
 '''
-performance_serie = read_csv('datos_aceituna_gilena.csv', usecols=[0,3], engine='python', index_col=0)
+performance_serie = read_csv('files/datos_aceituna_gilena.csv', usecols=[0,3], engine='python', index_col=0)
 performance_serie_df = DataFrame(performance_serie)
 performance_serie_df = performance_serie_df.loc[~(performance_serie_df==0).all(axis=1)]
 performance_serie_df.reset_index(inplace=True)
 performance_serie_df['FECHA'] = pd.to_datetime(performance_serie_df['FECHA'])
 performance_serie_df = performance_serie_df.set_index('FECHA')
-performance_serie_df.to_csv('STL_prueba_rendimiento.csv')
+performance_serie_df.to_csv('files/STL_prueba_rendimiento.csv')
 '''
 
-series = read_csv('STL_prueba_rendimiento.csv',header=0, index_col=0)
+series = read_csv('files/STL_prueba_rendimiento.csv',header=0, index_col=0)
 result = seasonal_decompose(series, model='multiplicative', freq=30)
 result.plot()
 pyplot.show()

@@ -15,25 +15,25 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 
-cli_data_2015 = read_csv('datos_clima_abril_mayo_2015.csv', usecols=[1,2], engine='python')
+cli_data_2015 = read_csv('files/datos_clima_abril_mayo_2015.csv', usecols=[1,2], engine='python')
 cli_data_2015 = cli_data_2015.values
 cli_data_2015df = DataFrame(cli_data_2015)
 cli_data_2015c1 = cli_data_2015df[0].values
 cli_data_2015c2 = cli_data_2015df[1].values
 
-cli_data_2016 = read_csv('datos_clima_abril_mayo_2016.csv', usecols=[1,2], engine='python')
+cli_data_2016 = read_csv('files/datos_clima_abril_mayo_2016.csv', usecols=[1,2], engine='python')
 cli_data_2016 = cli_data_2016.values
 cli_data_2016df = DataFrame(cli_data_2016)
 cli_data_2016c1 = cli_data_2016df[0].values
 cli_data_2016c2 = cli_data_2016df[1].values
 
-cli_data_2017 = read_csv('datos_clima_abril_mayo_2017.csv', usecols=[1,2], engine='python')
+cli_data_2017 = read_csv('files/datos_clima_abril_mayo_2017.csv', usecols=[1,2], engine='python')
 cli_data_2017 = cli_data_2017.values
 cli_data_2017df = DataFrame(cli_data_2017)
 cli_data_2017c1 = cli_data_2017df[0].values
 cli_data_2017c2 = cli_data_2017df[1].values
 
-cli_data_2018 = read_csv('datos_clima_abril_mayo_2018.csv', usecols=[1,2], engine='python')
+cli_data_2018 = read_csv('files/datos_clima_abril_mayo_2018.csv', usecols=[1,2], engine='python')
 cli_data_2018 = cli_data_2018.values
 cli_data_2018df = DataFrame(cli_data_2018)
 cli_data_2018c1 = cli_data_2018df[0].values
@@ -53,9 +53,9 @@ temp_data = temp_data.values
 
 
 #Load and process data
-data=read_csv('datos_aceituna_gilena.csv', usecols=[0,2,5], engine='python')
+data=read_csv('files/datos_aceituna_gilena.csv', usecols=[0,2,5], engine='python')
 dataset = data.values
-kilograms = read_csv('datos_aceituna_gilena.csv', usecols=[2], engine='python')
+kilograms = read_csv('files/datos_aceituna_gilena.csv', usecols=[2], engine='python')
 kilograms = kilograms.values
 minmax = MinMaxScaler(feature_range=(0,1))
 normalize_kilograms = minmax.fit_transform(kilograms)
@@ -131,16 +131,16 @@ for year in years:
 #Drop zeros
 acidity_data_2015 = DataFrame(sum2015)
 acidity_data_2015 = acidity_data_2015.loc[~(acidity_data_2015==0).all(axis=1)]
-#acidity_data_2015.to_csv('media_acidez_dias_2015.csv')
+#acidity_data_2015.to_csv('files/media_acidez_dias_2015.csv')
 acidity_data_2016 = DataFrame(sum2016)
 acidity_data_2016 = acidity_data_2016.loc[~(acidity_data_2016==0).all(axis=1)]
-#acidity_data_2016.to_csv('media_acidez_dias_2016.csv')
+#acidity_data_2016.to_csv('files/media_acidez_dias_2016.csv')
 acidity_data_2017 = DataFrame(sum2017)
 acidity_data_2017 = acidity_data_2017.loc[~(acidity_data_2017==0).all(axis=1)]
-#acidity_data_2017.to_csv('media_acidez_dias_2017.csv')
+#acidity_data_2017.to_csv('files/media_acidez_dias_2017.csv')
 acidity_data_2018 = DataFrame(sum2018)
 acidity_data_2018 = acidity_data_2018.loc[~(acidity_data_2018==0).all(axis=1)]
-#acidity_data_2018.to_csv('media_acidez_dias_2018.csv')
+#acidity_data_2018.to_csv('files/media_acidez_dias_2018.csv')
 
 acidity_data_2015 = acidity_data_2015.values[0:61]
 acidity_data_2016 = acidity_data_2016.values[0:61]

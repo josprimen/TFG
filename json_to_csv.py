@@ -18,13 +18,13 @@ from keras.layers import LSTM
 years = ['2015', '2016', '2017', '2018']
 
 for year in years:
-    df = pandas.read_json('datos_clima_'+year+'.json')
-    df.to_csv('datos_climatologia_'+year+'.csv')
-    data = read_csv('datos_climatologia_'+year+'.csv', usecols=[11, 17], engine='python')
+    df = pandas.read_json('files/datos_clima_'+year+'.json')
+    df.to_csv('files/files/datos_climatologia_'+year+'.csv')
+    data = read_csv('files/files/datos_climatologia_'+year+'.csv', usecols=[11, 17], engine='python')
     data.fillna('0,0', inplace=True)
     data = data.values
     df = DataFrame(data)
-    # df.to_csv('datos_clima_abril_mayo_2014.csv')
+    # df.to_csv('files/files/datos_clima_abril_mayo_2014.csv')
     # Los datos son de tipo String al venir de un JSON, modificamos la coma por un punto en el csv con ctrl+r
     # errata 03/05/2016 la roda de andalucia        2017-04-11
 
@@ -55,4 +55,4 @@ for year in years:
     copy = np.copy(data)
     copy = copy.astype('float32')
     copydf = DataFrame(copy)
-    copydf.to_csv('datos_clima_abril_mayo_' + year + '.csv')
+    copydf.to_csv('files/files/datos_clima_abril_mayo_' + year + '.csv')

@@ -18,36 +18,36 @@ from keras.layers import LSTM
 
 """
 ################################################################
-datos=read_csv('datos_aceituna_2015_2016.csv', engine='python')
+datos=read_csv('files/datos_aceituna_2015_2016.csv', engine='python')
 datos = datos.values
 datos = datos.astype('float32')
 df = DataFrame(datos)
 df = df.loc[~(df==0).all(axis=1)]
 df = df.loc[~(df==' ').all(axis=1)]
-#df.to_csv('datos_aceituna_tratados_2015_2016.csv')
+#df.to_csv('files/datos_aceituna_tratados_2015_2016.csv')
 
-da1 = read_csv('datos_aceituna_tratados_2015_2016.csv', usecols=[1], engine='python')
-da2 = read_csv('datos_aceituna_tratados_2016_2017.csv', usecols=[1], engine='python')
-da3 = read_csv('datos_aceituna_tratados_2017_2018.csv', usecols=[1], engine='python')
-da4 = read_csv('datos_aceituna_tratados_2018_2019.csv', usecols=[1], engine='python')
+da1 = read_csv('files/datos_aceituna_tratados_2015_2016.csv', usecols=[1], engine='python')
+da2 = read_csv('files/datos_aceituna_tratados_2016_2017.csv', usecols=[1], engine='python')
+da3 = read_csv('files/datos_aceituna_tratados_2017_2018.csv', usecols=[1], engine='python')
+da4 = read_csv('files/datos_aceituna_tratados_2018_2019.csv', usecols=[1], engine='python')
 da1 = da1.values
 da2 = da2.values
 da3 = da3.values
 da4 = da4.values
 da_prueba = np.concatenate((da1,da2,da3,da4))
 da_prueba_df = DataFrame(da_prueba)
-da_prueba_df.to_csv('datos_aceituna_tratados.csv')
+da_prueba_df.to_csv('files/datos_aceituna_tratados.csv')
 ################################################################
 """
 
 #TALARRUBIAS DATA
-#datos=read_csv('datos_aceituna_tratados.csv', usecols=[1], engine='python')
+#datos=read_csv('files/datos_aceituna_tratados.csv', usecols=[1], engine='python')
 
 #Set random seed to make initial weights static.
 np.random.seed(7)
 
 #Load and represent the dataset
-data = pandas.read_csv('datos_rendimiento_suma_dias.csv', usecols=[1], engine='python')
+data = pandas.read_csv('files/datos_rendimiento_suma_dias.csv', usecols=[1], engine='python')
 plt.plot(data)
 plt.show()
 #dataset = data.values

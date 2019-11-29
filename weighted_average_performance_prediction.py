@@ -17,9 +17,9 @@ from keras.layers import LSTM
 from keras.callbacks import EarlyStopping
 
 #Load and process data
-data=read_csv('datos_aceituna_gilena.csv', usecols=[0,2,3], engine='python')
+data=read_csv('files/datos_aceituna_gilena.csv', usecols=[0,2,3], engine='python')
 dataset = data.values
-kilograms = read_csv('datos_aceituna_gilena.csv', usecols=[2], engine='python')
+kilograms = read_csv('files/datos_aceituna_gilena.csv', usecols=[2], engine='python')
 kilograms = kilograms.values
 minmax = MinMaxScaler(feature_range=(0,1))
 normalize_kilograms = minmax.fit_transform(kilograms)
@@ -117,23 +117,23 @@ pyplot.show()
 #Drop zeros
 sum2015df = DataFrame(sum2015)
 sum2015df = sum2015df.loc[~(sum2015df==0).all(axis=1)]
-#sum2015df.to_csv('meday_rendimiento_days_2015.csv')
+#sum2015df.to_csv('files/meday_rendimiento_days_2015.csv')
 sum2015df = sum2015df.values
 sum2016df = DataFrame(sum2016)
 sum2016df = sum2016df.loc[~(sum2016df==0).all(axis=1)]
-#sum2016df.to_csv('meday_rendimiento_days_2016.csv')
+#sum2016df.to_csv('files/meday_rendimiento_days_2016.csv')
 sum2016df = sum2016df.values
 sum2017df = DataFrame(sum2017)
 sum2017df = sum2017df.loc[~(sum2017df==0).all(axis=1)]
-#sum2017df.to_csv('meday_rendimiento_days_2017.csv')
+#sum2017df.to_csv('files/meday_rendimiento_days_2017.csv')
 sum2017df = sum2017df.values
 sum2018df = DataFrame(sum2018)
 sum2018df = sum2018df.loc[~(sum2018df==0).all(axis=1)]
-#sum2018df.to_csv('meday_rendimiento_days_2018.csv')
+#sum2018df.to_csv('files/meday_rendimiento_days_2018.csv')
 sum2018df = sum2018df.values
 sum2019df = DataFrame(sum2019)
 sum2019df = sum2019df.loc[~(sum2019df==0).all(axis=1)]
-#sum2019df.to_csv('meday_rendimiento_days_2019.csv')
+#sum2019df.to_csv('files/meday_rendimiento_days_2019.csv')
 sum2019df = sum2019df.values
 
 
@@ -183,7 +183,7 @@ print('datos rendimiento:')
 print(performance_data)
 
 performance_datadf = DataFrame(performance_data)
-performance_datadf.to_csv('csv_media_ponderada_rendimiento.csv')
+performance_datadf.to_csv('files/csv_media_ponderada_rendimiento.csv')
 
 #Set random seed to make initial weights static.
 np.random.seed(7)

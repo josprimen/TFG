@@ -3,8 +3,8 @@ from pandas import DataFrame
 from pandas import read_csv
 from matplotlib import pyplot
 from statsmodels.tsa.seasonal import seasonal_decompose
-series = read_csv('STL_prueba_acidez.csv',header=0, index_col=0)
-#series = read_csv('datos_aceituna_gilena.csv', usecols=[0,3], engine='python', index_col=0)
+series = read_csv('files/STL_prueba_acidez.csv',header=0, index_col=0)
+#series = read_csv('files/datos_aceituna_gilena.csv', usecols=[0,3], engine='python', index_col=0)
 seriesdf = DataFrame(series)
 seriesdf.reset_index(inplace=True)
 seriesdf['FECHA'] = pd.to_datetime(seriesdf['FECHA'])
@@ -17,7 +17,7 @@ pyplot.show()
 
 
 '''
-series = read_csv('datos_aceituna_gilena.csv', usecols=[0,3], engine='python', index_col=0)
+series = read_csv('files/datos_aceituna_gilena.csv', usecols=[0,3], engine='python', index_col=0)
 seriesdf = DataFrame(series)
 seriesdf.reset_index(inplace=True)
 seriesdf['FECHA'] = pd.to_datetime(seriesdf['FECHA'])
@@ -35,7 +35,7 @@ print(result.observed)
 aa = result.trend
 #na
 aaaadf = DataFrame(aa)
-aaaadf.to_csv('trend_STL_rendimiento.csv')
+aaaadf.to_csv('files/trend_STL_rendimiento.csv')
 '''
 
 

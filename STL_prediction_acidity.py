@@ -15,16 +15,16 @@ from keras.callbacks import EarlyStopping
 
 #format the dataset to STL
 '''
-acidity_serie = read_csv('datos_aceituna_gilena.csv', usecols=[0,5], engine='python', index_col=0)
+acidity_serie = read_csv('files/datos_aceituna_gilena.csv', usecols=[0,5], engine='python', index_col=0)
 acidity_serie_df = DataFrame(acidity_serie)
 acidity_serie_df = acidity_serie_df.loc[~(acidity_serie_df==0).all(axis=1)]
 acidity_serie_df.reset_index(inplace=True)
 acidity_serie_df['FECHA'] = pd.to_datetime(acidity_serie_df['FECHA'])
 acidity_serie_df = acidity_serie_df.set_index('FECHA')
-acidity_serie_df.to_csv('STL_prueba_acidez.csv')
+acidity_serie_df.to_csv('files/STL_prueba_acidez.csv')
 '''
 
-series = read_csv('STL_prueba_acidez.csv',header=0, index_col=0)
+series = read_csv('files/STL_prueba_acidez.csv',header=0, index_col=0)
 result = seasonal_decompose(series, model='multiplicative', freq=30)
 result.plot()
 pyplot.show()

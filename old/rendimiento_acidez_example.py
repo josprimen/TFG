@@ -15,11 +15,11 @@ from keras.layers import Dense
 from keras.layers import LSTM
 
 
-#datos=read_csv('datos_aceituna_gilena.csv', usecols=[3,5], engine='python')
+#datos=read_csv('files/datos_aceituna_gilena.csv', usecols=[3,5], engine='python')
 #datos = datos.values
 
-rendimientocsv = read_csv('csv_media_ponderada_rendimiento.csv', usecols=[1], engine='python')
-acidezcsv = read_csv('csv_media_ponderada_acidez.csv', usecols=[1], engine='python')
+rendimientocsv = read_csv('files/csv_media_ponderada_rendimiento.csv', usecols=[1], engine='python')
+acidezcsv = read_csv('files/csv_media_ponderada_acidez.csv', usecols=[1], engine='python')
 datos = concatenate((acidezcsv, rendimientocsv), axis=1)
 
 '''
@@ -32,7 +32,7 @@ datos[:,1] = rendimiento
 
 print(datos)
 df = DataFrame(datos)
-#df.to_csv('datos_aceituna_gilena.csv')
+#df.to_csv('files/datos_aceituna_gilena.csv')
 columna_rendimiento = df[0].values
 columna_acidez = df[1].values
 groups = [columna_rendimiento, columna_acidez]

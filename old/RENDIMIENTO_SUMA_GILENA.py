@@ -18,7 +18,7 @@ from keras.layers import LSTM
 
 
 
-datos=read_csv('datos_aceituna_gilena.csv', usecols=[0,3], engine='python')
+datos=read_csv('files/datos_aceituna_gilena.csv', usecols=[0,3], engine='python')
 datoss = datos.values
 anyos= ['2015', '2016', '2017', '2018', '2019']
 meses = ['01','10','11','12']
@@ -98,23 +98,23 @@ pyplot.show()
 
 suma2015df = DataFrame(suma2015)
 suma2015df = suma2015df.loc[~(suma2015df==0).all(axis=1)]
-#suma2015df.to_csv('media_rendimiento_dias_2015.csv')
+#suma2015df.to_csv('files/media_rendimiento_dias_2015.csv')
 suma2015df = suma2015df.values
 suma2016df = DataFrame(suma2016)
 suma2016df = suma2016df.loc[~(suma2016df==0).all(axis=1)]
-#suma2016df.to_csv('media_rendimiento_dias_2016.csv')
+#suma2016df.to_csv('files/media_rendimiento_dias_2016.csv')
 suma2016df = suma2016df.values
 suma2017df = DataFrame(suma2017)
 suma2017df = suma2017df.loc[~(suma2017df==0).all(axis=1)]
-#suma2017df.to_csv('media_rendimiento_dias_2017.csv')
+#suma2017df.to_csv('files/media_rendimiento_dias_2017.csv')
 suma2017df = suma2017df.values
 suma2018df = DataFrame(suma2018)
 suma2018df = suma2018df.loc[~(suma2018df==0).all(axis=1)]
-#suma2018df.to_csv('media_rendimiento_dias_2018.csv')
+#suma2018df.to_csv('files/media_rendimiento_dias_2018.csv')
 suma2018df = suma2018df.values
 suma2019df = DataFrame(suma2019)
 suma2019df = suma2019df.loc[~(suma2019df==0).all(axis=1)]
-#suma2019df.to_csv('media_rendimiento_dias_2019.csv')
+#suma2019df.to_csv('files/media_rendimiento_dias_2019.csv')
 suma2019df = suma2019df.values
 
 
@@ -273,9 +273,9 @@ from keras.callbacks import EarlyStopping
 
 
 
-datos=read_csv('datos_aceituna_gilena.csv', usecols=[0,2,3], engine='python')
+datos=read_csv('files/datos_aceituna_gilena.csv', usecols=[0,2,3], engine='python')
 datoss = datos.values
-kilos = read_csv('datos_aceituna_gilena.csv', usecols=[2], engine='python')
+kilos = read_csv('files/datos_aceituna_gilena.csv', usecols=[2], engine='python')
 kilos = kilos.values
 #MOD? RANGO DE 1 A 2
 minmax = MinMaxScaler(feature_range=(0,1))
@@ -376,23 +376,23 @@ pyplot.show()
 
 suma2015df = DataFrame(suma2015)
 suma2015df = suma2015df.loc[~(suma2015df==0).all(axis=1)]
-#suma2015df.to_csv('media_rendimiento_dias_2015.csv')
+#suma2015df.to_csv('files/media_rendimiento_dias_2015.csv')
 suma2015df = suma2015df.values
 suma2016df = DataFrame(suma2016)
 suma2016df = suma2016df.loc[~(suma2016df==0).all(axis=1)]
-#suma2016df.to_csv('media_rendimiento_dias_2016.csv')
+#suma2016df.to_csv('files/media_rendimiento_dias_2016.csv')
 suma2016df = suma2016df.values
 suma2017df = DataFrame(suma2017)
 suma2017df = suma2017df.loc[~(suma2017df==0).all(axis=1)]
-#suma2017df.to_csv('media_rendimiento_dias_2017.csv')
+#suma2017df.to_csv('files/media_rendimiento_dias_2017.csv')
 suma2017df = suma2017df.values
 suma2018df = DataFrame(suma2018)
 suma2018df = suma2018df.loc[~(suma2018df==0).all(axis=1)]
-#suma2018df.to_csv('media_rendimiento_dias_2018.csv')
+#suma2018df.to_csv('files/media_rendimiento_dias_2018.csv')
 suma2018df = suma2018df.values
 suma2019df = DataFrame(suma2019)
 suma2019df = suma2019df.loc[~(suma2019df==0).all(axis=1)]
-#suma2019df.to_csv('media_rendimiento_dias_2019.csv')
+#suma2019df.to_csv('files/media_rendimiento_dias_2019.csv')
 suma2019df = suma2019df.values
 
 
@@ -445,7 +445,7 @@ print(datos_rendimiento)
 
 
 csv_media_ponderada_rendimiento = DataFrame(datos_rendimiento)
-csv_media_ponderada_rendimiento.to_csv('csv_media_ponderada_rendimiento.csv')
+csv_media_ponderada_rendimiento.to_csv('files/csv_media_ponderada_rendimiento.csv')
 datos = datos_rendimiento
 
 pyplot.plot(datos[:])
