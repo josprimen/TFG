@@ -15,6 +15,8 @@ from sklearn.metrics import mean_squared_error
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
+from keras.callbacks import EarlyStopping
+
 
 """
 ################################################################
@@ -47,7 +49,7 @@ da_prueba_df.to_csv('files/datos_aceituna_tratados.csv')
 np.random.seed(7)
 
 #Load and represent the dataset
-data = pandas.read_csv('files/datos_aceituna_gilena.csv', usecols=[3], engine='python')
+data = pandas.read_csv('files/datos_aceituna_gilena.csv', usecols=[5], engine='python')
 df = DataFrame(data)
 df = df.loc[~(df==0).all(axis=1)]
 dataset = df.values
@@ -58,7 +60,6 @@ plt.show()
 #Normalize the dataset
 minmax = MinMaxScaler(feature_range=(0,1))
 dataset = minmax.fit_transform(dataset)
-print(dataset[0:10])
 
 #Split into train and test sets
 train_size = int(len(dataset) * 0.67)
@@ -107,20 +108,27 @@ model.add(LSTM(4, input_shape=(look_back,1)))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
 
-model.fit(trainX, trainY, epochs=10, batch_size=1, verbose=2)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=15, min_delta=0.001)
 
+history = model.fit(trainX, trainY, epochs=20, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
+
+#Represent loss
+pyplot.plot(history.history['loss'], label='train')
+pyplot.plot(history.history['val_loss'], label='test')
+pyplot.legend()
+pyplot.show()
 
 #Make prediction
 trainPredict = model.predict(trainX)
-print('La predicción de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
+print('La predicción de la red neuronal para los data de entrenamiento: \n' + str(trainPredict))
 testPredict = model.predict(testX)
-print('La predicción de la red neuronal para los datos de test: \n' + str(testPredict))
+print('La predicción de la red neuronal para los data de test: \n' + str(testPredict))
 #Invert the normalize
 trainPredict = minmax.inverse_transform(trainPredict)
-print('La predicción de la red neuronal para los datos de entrenamiento INVERTIDOS: \n' + str(trainPredict))
+print('La predicción de la red neuronal para los data de entrenamiento INVERTIDOS: \n' + str(trainPredict))
 trainY = minmax.inverse_transform([trainY])
 testPredict = minmax.inverse_transform(testPredict)
-print('La predicción de la red neuronal para los datos de test INVERTLDOS: \n' + str(testPredict))
+print('La predicción de la red neuronal para los data de test INVERTLDOS: \n' + str(testPredict))
 testY = minmax.inverse_transform([testY])
 #Calculate the mean square error
 trainScore = math.sqrt(mean_squared_error(trainY[0], trainPredict[:,0]))
