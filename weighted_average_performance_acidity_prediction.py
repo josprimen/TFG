@@ -16,21 +16,17 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from keras.callbacks import EarlyStopping
 
-
+acidity_data = read_csv('files/csv_media_ponderada_acidez.csv', usecols=[1], engine='python')
+performance_data = read_csv('files/csv_media_ponderada_rendimiento.csv', usecols=[1], engine='python')
 
 #Set random seed to make initial weights static.
 np.random.seed(7)
 
 #Load and represent the dataset
 #conjunto = concatenate((performance_data, acidity_data), axis=1)
-data = read_csv('files/datos_aceituna_gilena.csv', usecols=[3, 5], engine='python')
-df = DataFrame(data)
-df = df.loc[~(df==0).all(axis=1)]
-dataset = df.values
-dataset= dataset.astype('float32')
-
+dataset = concatenate((acidity_data, performance_data), axis=1)
 groups = [0,1]
-columns = ['Rendimiento', 'Acidez']
+columns = ['Acidez', 'Rendimiento']
 features = 2
 look_back = 1
 
@@ -44,6 +40,7 @@ for group in groups:
 pyplot.show()
 
 #Normalize data
+dataset = dataset.astype('float32')
 scaler = MinMaxScaler(feature_range=(0, 1))
 normalize_data = scaler.fit_transform(dataset)
 
@@ -72,7 +69,6 @@ test = normalize_data[train_size:, :]
 trainX, trainY = dataX(train, features), dataY(train)
 testX, testY = dataX(test, features), dataY(test)
 
-print(dataset[:10])
 print('train dataset')
 print(train)
 print('data trainX')
@@ -90,11 +86,11 @@ print(len(testY))
 
 #Create and fit the LSTM network
 model = Sequential()
-model.add(LSTM(10, input_shape=(look_back, features)))
+model.add(LSTM(50, input_shape=(1, features)))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 #Fit network
-history = model.fit(trainX, trainY, epochs=150, batch_size=72, validation_data=(testX, testY), verbose=2, shuffle=False)
+history = model.fit(trainX, trainY, epochs=50, batch_size=72, validation_data=(testX, testY), verbose=2, shuffle=False)
 #Plot history
 pyplot.plot(history.history['loss'], label='train')
 pyplot.plot(history.history['val_loss'], label='test')

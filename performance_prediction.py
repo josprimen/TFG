@@ -49,7 +49,7 @@ da_prueba_df.to_csv('files/datos_aceituna_tratados.csv')
 np.random.seed(7)
 
 #Load and represent the dataset
-data = pandas.read_csv('files/datos_aceituna_gilena.csv', usecols=[3], engine='python')
+data = read_csv('files/datos_aceituna_gilena.csv', usecols=[3], engine='python')
 df = DataFrame(data)
 df = df.loc[~(df==0).all(axis=1)]
 dataset = df.values

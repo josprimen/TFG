@@ -217,7 +217,7 @@ print(len(testY))
 
 #Create and fit the LSTM network
 model = Sequential()
-model.add(LSTM(50, input_shape=(1, features)))
+model.add(LSTM(50, input_shape=(look_back, features)))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 #Fit network
