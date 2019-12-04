@@ -13,7 +13,7 @@ from sklearn.metrics import mean_squared_error
 np.random.seed(7)
 
 #Load and represent the dataset
-data = pandas.read_csv('files/files/airline-passengers.csv', usecols=[1], engine='python')
+data = pandas.read_csv('files/airline-passengers.csv', usecols=[1], engine='python')
 plt.plot(data)
 plt.show()
 dataset = data.values

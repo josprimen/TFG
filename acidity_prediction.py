@@ -92,7 +92,6 @@ testX = dataX(test, look_back)
 testY = dataY(test, look_back)
 
 
-
 print('Conjunto de entrenamientoX t: \n' + str(trainX))
 print('Con shape' + str(trainX.shape))
 print('Conjunto de entrenamientoY t+1: \n' + str(trainY))
@@ -110,7 +109,7 @@ model.compile(loss='mean_squared_error', optimizer='adam')
 
 es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=15, min_delta=0.001)
 
-history = model.fit(trainX, trainY, epochs=20, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
+history = model.fit(trainX, trainY, epochs=4, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
 
 #Represent loss
 pyplot.plot(history.history['loss'], label='train')
@@ -120,15 +119,22 @@ pyplot.show()
 
 #Make prediction
 trainPredict = model.predict(trainX)
-print('La predicción de la red neuronal para los data de entrenamiento: \n' + str(trainPredict))
+print('La predicción de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
 testPredict = model.predict(testX)
-print('La predicción de la red neuronal para los data de test: \n' + str(testPredict))
+print('La predicción de la red neuronal para los datos de test: \n' + str(testPredict))
+
+#Calculate the mean square error
+trainScore = math.sqrt(mean_squared_error(trainY[0], trainPredict[:,0]))
+print('Train Score: %.2f RMSE' % (trainScore))
+testScore = math.sqrt(mean_squared_error(testY[0], testPredict[:,0]))
+print('Test Score: %.2f RMSE' % (testScore))
+
 #Invert the normalize
 trainPredict = minmax.inverse_transform(trainPredict)
-print('La predicción de la red neuronal para los data de entrenamiento INVERTIDOS: \n' + str(trainPredict))
+print('La predicción de la red neuronal para los datos de entrenamiento INVERTIDOS: \n' + str(trainPredict))
 trainY = minmax.inverse_transform([trainY])
 testPredict = minmax.inverse_transform(testPredict)
-print('La predicción de la red neuronal para los data de test INVERTLDOS: \n' + str(testPredict))
+print('La predicción de la red neuronal para los datos de test INVERTLDOS: \n' + str(testPredict))
 testY = minmax.inverse_transform([testY])
 #Calculate the mean square error
 trainScore = math.sqrt(mean_squared_error(trainY[0], trainPredict[:,0]))

@@ -120,15 +120,15 @@ pyplot.show()
 
 #Make prediction
 trainPredict = model.predict(trainX)
-print('La predicción de la red neuronal para los data de entrenamiento: \n' + str(trainPredict))
+print('La predicción de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
 testPredict = model.predict(testX)
-print('La predicción de la red neuronal para los data de test: \n' + str(testPredict))
+print('La predicción de la red neuronal para los datos de test: \n' + str(testPredict))
 #Invert the normalize
 trainPredict = minmax.inverse_transform(trainPredict)
-print('La predicción de la red neuronal para los data de entrenamiento INVERTIDOS: \n' + str(trainPredict))
+print('La predicción de la red neuronal para los datos de entrenamiento INVERTIDOS: \n' + str(trainPredict))
 trainY = minmax.inverse_transform([trainY])
 testPredict = minmax.inverse_transform(testPredict)
-print('La predicción de la red neuronal para los data de test INVERTLDOS: \n' + str(testPredict))
+print('La predicción de la red neuronal para los datos de test INVERTLDOS: \n' + str(testPredict))
 testY = minmax.inverse_transform([testY])
 #Calculate the mean square error
 trainScore = math.sqrt(mean_squared_error(trainY[0], trainPredict[:,0]))
