@@ -28,157 +28,159 @@ dataset[:,1] = normalize_kilograms[:,0]
 years= ['2015', '2016', '2017', '2018', '2019']
 months = ['01','10','11','12']
 days = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30']
-sum = []
-sum2015 = []
-sum2016 = []
-sum2017 = []
-sum2018 = []
-sum2019 = []
-sumall = []
+average = []
+aver2015 = []
+aver2016 = []
+aver2017 = []
+aver2018 = []
+aver2019 = []
+averageall = []
 
 #Weigthed average acidity (days)
 for year in years:
     for month in months:
         for day in days:
-            sum_day = 0
+            average_day = 0
             delivery_note_number = 0
             for d in dataset:
                 if (day+'/'+month+'/'+year) in d[0]:
-                    print('Fecha: ' + d[0] + ' Acidez: ' + str(d[2]))
-                    sum_day = sum_day + d[1]*d[2]
+                    print('Fecha: ' + d[0] + ' Acidez: ' + str(d[2]) + ' Kilos (en escala 0-1): '+ str(d[1]))
+                    average_day = average_day + d[1]*d[2]
                     delivery_note_number = delivery_note_number +1
-            sumall.append(sum_day)
+            averageall.append(average_day)
             if year == '2015':
               if delivery_note_number==0:
-                sum2015.append(sum_day)
+                aver2015.append(average_day)
               else:
-                sum2015.append(sum_day/delivery_note_number)
+                aver2015.append(average_day/delivery_note_number)
             if year == '2016':
               if delivery_note_number==0:
-                sum2016.append(sum_day)
+                aver2016.append(average_day)
               else:
-                sum2016.append(sum_day/delivery_note_number)
+                aver2016.append(average_day/delivery_note_number)
             if year == '2017':
               if delivery_note_number==0:
-                sum2017.append(sum_day)
+                aver2017.append(average_day)
               else:
-                sum2017.append(sum_day/delivery_note_number)
+                aver2017.append(average_day/delivery_note_number)
             if year == '2018':
               if delivery_note_number==0:
-                sum2018.append(sum_day)
+                aver2018.append(average_day)
               else:
-                sum2018.append(sum_day/delivery_note_number)
+                aver2018.append(average_day/delivery_note_number)
             if year == '2019':
               if delivery_note_number==0:
-                sum2019.append(sum_day)
+                aver2019.append(average_day)
               else:
-                sum2019.append(sum_day/delivery_note_number)
+                aver2019.append(average_day/delivery_note_number)
 
-print('sum All: ')
-print(sumall)
+print('average All: ')
+print(averageall)
 print('len')
-print(len(sumall))
+print(len(averageall))
 print('\n')
 
-print('sum 2015: ')
-print(sum2015)
+print('average 2015: ')
+print(aver2015)
 print('len')
-print(len(sum2015))
+print(len(aver2015))
 print('\n')
 
-print('sum 2016: ')
-print(sum2016)
+print('average 2016: ')
+print(aver2016)
 print('len')
-print(len(sum2016))
+print(len(aver2016))
 print('\n')
 
-print('sum 2017: ')
-print(sum2017)
+print('average 2017: ')
+print(aver2017)
 print('len')
-print(len(sum2017))
+print(len(aver2017))
 print('\n')
 
-print('sum 2018: ')
-print(sum2018)
+print('average 2018: ')
+print(aver2018)
 print('len')
-print(len(sum2018))
+print(len(aver2018))
 print('\n')
 
 
-sum_years = [sum2015, sum2016, sum2017, sum2018, sum2019]
+average_years = [aver2015, aver2016, aver2017, aver2018, aver2019]
 aux = 1
 pyplot.figure()
-for result in sum_years:
+for result in average_years:
     pyplot.subplot(5, 1, aux)
     pyplot.plot(result)
+    pyplot.title(years[aux - 1], y=0.5, loc='right')
     aux = aux+1
 pyplot.show()
 
 #Drop zeros
-sum2015df = DataFrame(sum2015)
-sum2015df = sum2015df.loc[~(sum2015df==0).all(axis=1)]
-#sum2015df.to_csv('files/media_acidez_dias_2015.csv')
-sum2015df = sum2015df.values
-sum2016df = DataFrame(sum2016)
-sum2016df = sum2016df.loc[~(sum2016df==0).all(axis=1)]
-#sum2016df.to_csv('files/media_acidez_dias_2016.csv')
-sum2016df = sum2016df.values
-sum2017df = DataFrame(sum2017)
-sum2017df = sum2017df.loc[~(sum2017df==0).all(axis=1)]
-#sum2017df.to_csv('files/media_acidez_dias_2017.csv')
-sum2017df = sum2017df.values
-sum2018df = DataFrame(sum2018)
-sum2018df = sum2018df.loc[~(sum2018df==0).all(axis=1)]
-#sum2018df.to_csv('files/media_acidez_dias_2018.csv')
-sum2018df = sum2018df.values
-sum2019df = DataFrame(sum2019)
-sum2019df = sum2019df.loc[~(sum2019df==0).all(axis=1)]
-#sum2019df.to_csv('files/media_acidez_dias_2019.csv')
-sum2019df = sum2019df.values
+aver2015df = DataFrame(aver2015)
+aver2015df = aver2015df.loc[~(aver2015df==0).all(axis=1)]
+#aver2015df.to_csv('files/media_acidez_dias_2015.csv')
+aver2015df = aver2015df.values
+aver2016df = DataFrame(aver2016)
+aver2016df = aver2016df.loc[~(aver2016df==0).all(axis=1)]
+#aver2016df.to_csv('files/media_acidez_dias_2016.csv')
+aver2016df = aver2016df.values
+aver2017df = DataFrame(aver2017)
+aver2017df = aver2017df.loc[~(aver2017df==0).all(axis=1)]
+#aver2017df.to_csv('files/media_acidez_dias_2017.csv')
+aver2017df = aver2017df.values
+aver2018df = DataFrame(aver2018)
+aver2018df = aver2018df.loc[~(aver2018df==0).all(axis=1)]
+#aver2018df.to_csv('files/media_acidez_dias_2018.csv')
+aver2018df = aver2018df.values
+aver2019df = DataFrame(aver2019)
+aver2019df = aver2019df.loc[~(aver2019df==0).all(axis=1)]
+#aver2019df.to_csv('files/media_acidez_dias_2019.csv')
+aver2019df = aver2019df.values
 
 
-print('sum 2015 Drop zeros: ')
-print(sum2015df)
+print('average 2015 Drop zeros: ')
+print(aver2015df)
 print('len')
-print(len(sum2015df))
+print(len(aver2015df))
 print('\n')
 
-print('sum 2016 Drop zeros: ')
-print(sum2016df)
+print('average 2016 Drop zeros: ')
+print(aver2016df)
 print('len')
-print(len(sum2016df))
+print(len(aver2016df))
 print('\n')
 
-print('sum 2017 Drop zeros: ')
-print(sum2017df)
+print('average 2017 Drop zeros: ')
+print(aver2017df)
 print('len')
-print(len(sum2017df))
+print(len(aver2017df))
 print('\n')
 
-print('sum 2018 Drop zeros: ')
-print(sum2018df)
+print('average 2018 Drop zeros: ')
+print(aver2018df)
 print('len')
-print(len(sum2018df))
+print(len(aver2018df))
 print('\n')
 
-print('sum 2019 Drop zeros: ')
-print(sum2019df)
+print('average 2019 Drop zeros: ')
+print(aver2019df)
 print('len')
-print(len(sum2019df))
+print(len(aver2019df))
 print('\n')
 
-sum_years_df = [sum2015df, sum2016df, sum2017df, sum2018df, sum2019df]
+average_years_df = [aver2015df, aver2016df, aver2017df, aver2018df, aver2019df]
 aux = 1
 pyplot.figure()
-for result in sum_years_df:
+for result in average_years_df:
     pyplot.subplot(5, 1, aux)
     pyplot.plot(result)
+    pyplot.title(years[aux - 1], y=0.5, loc='right')
     aux = aux+1
 
 pyplot.show()
 
 #Concatenate all years data
-acidity_data = np.concatenate((sum2015df, sum2016df, sum2017df, sum2018df, sum2019df))
+acidity_data = np.concatenate((aver2015df, aver2016df, aver2017df, aver2018df, aver2019df))
 print('datos acidez:')
 print(acidity_data)
 
@@ -245,7 +247,7 @@ model.add(LSTM(4, input_shape=(look_back,1)))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
 
-es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=20, min_delta=0.001)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=15, min_delta=0.001)
 
 history = model.fit(trainX, trainY, epochs=100, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
 
