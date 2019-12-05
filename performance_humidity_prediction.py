@@ -23,14 +23,14 @@ np.random.seed(7)
 
 #Load and represent the dataset
 #conjunto = concatenate((performance_data, acidity_data), axis=1)
-data = read_csv('files/datos_aceituna_gilena.csv', usecols=[3, 5], engine='python')
+data = read_csv('files/datos_aceituna_gilena.csv', usecols=[3, 4], engine='python')
 df = DataFrame(data)
 df = df.loc[~(df==0).all(axis=1)]
 dataset = df.values
 dataset= dataset.astype('float32')
 
 groups = [0,1]
-columns = ['Rendimiento', 'Acidez']
+columns = ['Rendimiento', 'Humedad']
 features = 2
 look_back = 1
 
