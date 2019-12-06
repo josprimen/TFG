@@ -25,7 +25,7 @@ performance_serie_df.to_csv('files/STL_prueba_rendimiento.csv')
 '''
 
 series = read_csv('files/STL_prueba_rendimiento.csv',header=0, index_col=0)
-result = seasonal_decompose(series, model='multiplicative', freq=30)
+result = seasonal_decompose(series, freq=30)
 result.plot()
 pyplot.show()
 
@@ -93,9 +93,9 @@ model.add(LSTM(4, input_shape=(look_back,1)))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
 
-es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=20, min_delta=0.001)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=15, min_delta=0.001)
 
-history = model.fit(trainX, trainY, epochs=100, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
+history = model.fit(trainX, trainY, epochs=50, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
 
 #Represent loss
 pyplot.plot(history.history['loss'], label='train')
