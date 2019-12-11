@@ -109,7 +109,7 @@ model.compile(loss='mean_squared_error', optimizer='adam')
 
 es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=15, min_delta=0.001)
 
-history = model.fit(trainX, trainY, epochs=4, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
+history = model.fit(trainX, trainY, epochs=20, validation_split=0.3, batch_size=1, verbose=2, callbacks=[es])
 
 #Represent loss
 pyplot.plot(history.history['loss'], label='train')
@@ -122,12 +122,6 @@ trainPredict = model.predict(trainX)
 print('La predicción de la red neuronal para los datos de entrenamiento: \n' + str(trainPredict))
 testPredict = model.predict(testX)
 print('La predicción de la red neuronal para los datos de test: \n' + str(testPredict))
-
-#Calculate the mean square error
-trainScore = math.sqrt(mean_squared_error(trainY[0], trainPredict[:,0]))
-print('Train Score: %.2f RMSE' % (trainScore))
-testScore = math.sqrt(mean_squared_error(testY[0], testPredict[:,0]))
-print('Test Score: %.2f RMSE' % (testScore))
 
 #Invert the normalize
 trainPredict = minmax.inverse_transform(trainPredict)
