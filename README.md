@@ -1,7 +1,7 @@
 # Aplicación de redes Long Short-Term Memory para predicción de la calidad de la oliva en campaña
 realizado por José Enrique Prieto Menacho como trabajo de fin de grado en I.Informática- TI en la Universidad de Sevilla
 
-##INSTALANDO EL ENTORNO
+## INSTALANDO EL ENTORNO
 
 -Instalar anaconda desde la web.<br />
 -Instalar pycharm desde la web.<br />
@@ -13,7 +13,7 @@ realizado por José Enrique Prieto Menacho como trabajo de fin de grado en I.Inf
 -Abrir un proyecto en pycharm, file>settings>proyect interpreter>add interpeter>C:\Users\jose9\Anaconda3\envs\redes_neuronales\python.exe
 <br /><br />
 
-##PROBLEMAS/SOLUCIONES.<br />
+## PROBLEMAS/SOLUCIONES.<br />
 -SI SE QUEDA EN SOLVING ENVIROMENT USAR conda update conda o mirar el path.<br />
 -Al instalar keras error, se cierra el prompt-> [solución](https://stackoverflow.com/questions/53483685/keras-breaks-anaconda-prompt)<br />
 -En Anaconda3 editar keras_activate.bat cambiar donde ponga <br />
