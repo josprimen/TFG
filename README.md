@@ -23,3 +23,13 @@ por<br />
 <br />
 
 
+## ARCHIVOS Y FUNCIONAMIENTO
+Una vez importado el proyecto a nuestro entorno simplemente hemos de ejecutar el archivo python que queramos.<br />
+En "files" se encuentran los datos usados, tanto en bruto como una vez hecho el tratamiento de estos. <br /><br />
+### ¿Qué hace cada fichero?<br />
+- performance_prediction.py
+- acidity_prediction.py
+
+<br />
+
+### ¿En qué orden ejecuto?<br />
