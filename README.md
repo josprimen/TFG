@@ -10,7 +10,7 @@ realizado por José Enrique Prieto Menacho como trabajo de fin de grado en I.Inf
 -Activar el entorno: conda activate redes_neuronales.<br />
 -Instalar tensorflow en el entorno: conda install -c conda-forge tensorflow.<br />
 -Instalar keras en el entorno: conda install -c conda-forge keras.<br />
--Abrir un proyecto en pycharm, file>settings>proyect interpreter>add interpeter>C:\Users\jose9\Anaconda3\envs\redes_neuronales\python.exe
+-Abrir un proyecto en pycharm, file>settings>proyect interpreter>add interpeter>C:\Users\jose9\Anaconda3\envs\redes_neuronales\python.exe (o ruta correspondiente)
 <br /><br />
 
 ## PROBLEMAS/SOLUCIONES.<br />
