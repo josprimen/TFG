@@ -1,20 +1,25 @@
-#Instalando el entorno
+# Aplicación de redes Long Short-Term Memory para predicción de la calidad de la oliva en campaña
+realizado por José Enrique Prieto Menacho como trabajo de fin de grado en I.Informática- TI en la Universidad de Sevilla
 
-Instalar anaconda desde la web.
-Instalar pycharm desde la web
-Ejecutar el prompt de anaconda
-Crear un entorno: conda create -n redes_neuronales python=3.6.8 (3.7 da conflicto con keras y tensorflow)
-Activar el entorno: conda activate redes_neuronales
-Instalar tensorflow en el entorno: conda install -c conda-forge tensorflow
-Instalar keras en el entorno: conda install -c conda-forge keras
-Abrir un proyecto en pycharm, file>settings>proyect interpreter>add interpeter>C:\Users\jose9\Anaconda3\envs\redes_neuronales\python.exe
+##INSTALANDO EL ENTORNO
+
+-Instalar anaconda desde la web.<br />
+-Instalar pycharm desde la web.<br />
+-Ejecutar el prompt de anaconda. <br />
+-Crear un entorno: conda create -n redes_neuronales python=3.6.8 (3.7 da conflicto con keras y tensorflow).<br />
+-Activar el entorno: conda activate redes_neuronales.<br />
+-Instalar tensorflow en el entorno: conda install -c conda-forge tensorflow.<br />
+-Instalar keras en el entorno: conda install -c conda-forge keras.<br />
+-Abrir un proyecto en pycharm, file>settings>proyect interpreter>add interpeter>C:\Users\jose9\Anaconda3\envs\redes_neuronales\python.exe
+<br /><br />
+
+##PROBLEMAS/SOLUCIONES.<br />
+-SI SE QUEDA EN SOLVING ENVIROMENT USAR conda update conda o mirar el path.<br />
+-Al instalar keras error, se cierra el prompt-> [solución](https://stackoverflow.com/questions/53483685/keras-breaks-anaconda-prompt)<br />
+-En Anaconda3 editar keras_activate.bat cambiar donde ponga <br />
+`>nul`<br />
+por<br />
+`1>`
 <br />
-PROBLEMAS/SOLUCIONES
-SI SE QUEDA EN SOLVING ENVIROMENT USAR conda update conda o mirar el path
-Al instalar keras error, se cierra el prompt
-https://stackoverflow.com/questions/53483685/keras-breaks-anaconda-prompt
-En Anaconda3 editar keras_activate.bat cambiar donde ponga 
->nul
-por
-1>
-<br />
+
+
