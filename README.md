@@ -29,29 +29,27 @@ En "files" se encuentran los datos usados, tanto en bruto como una vez hecho el 
 ### ¿Qué hace cada fichero?<br />
 #### Predicción con una variable<br />
 - performance_prediction.py -> Predicción del rendimiento de la oliva usando rendimientos observados.
-- acidity_prediction.py -> Predicción de la acidez de la oliva usando acideces observadas
-<br />
+- acidity_prediction.py -> Predicción de la acidez de la oliva usando acideces observadas.
 #### Predicción con múltiples variables: Dos variables<br />
-- performance_acidity_prediction.py -> Predicción del rendimiento de la oliva usando rendimientosy acideces observadas.
+- performance_acidity_prediction.py -> Predicción del rendimiento de la oliva usando rendimientos y acideces observadas.
 - performance_humidity_prediction.py -> Predicción del rendimiento de la oliva usando rendimientos y humedad observadas.
-<br />
-#### Predicción con múltiples variables: Tres variables<br />
-- temp_precip_acidity.py
-- air_quality_example.py
-<br />
+- temp_precip_acidity.py -> Predicción de la acidez de la oliva usando datos de temperatura y precipitación.
 #### Predicción usando la media ponderada de rendimiento y acidez de las cargas recibidas por días.<br />
-- weighted_average_acidity_prediction.py
-- weighted_average_performance_prediction.py
-- weighted_average_performance_acidity_prediction.py
-<br />
+- weighted_average_acidity_prediction.py -> Predicción de la acidez de la oliva usando las medias de las acideces observadas.
+- weighted_average_performance_prediction.py -> Predicción del rendimiento de la oliva usando las medias de los rendimientos observados.
+- weighted_average_performance_acidity_prediction.py -> Predicción del rendimiento de la oliva usando las medias de los rendimientos y acideces observadas.
 #### Pruebas de predicción usando STL (Seasonal and Trend decomposition using Loess)<br />
-- STL_prediction_acidity.py
-- STL_prediction_performance.py
-- STL_weighted_average_acidity_prediction.py
-- STL_weighted_average_performance_prediction.py
-<br />
+- STL_prediction_acidity.py -> Predicción de la acidez usando los datos de la descomposición STL de la acidez.
+- STL_prediction_performance.py -> Preddicción del rendimiento usando los datos de la descomposición STL del rendimiento.
+- STL_weighted_average_acidity_prediction.py -> Descomposición STL de la acidez.
+- STL_weighted_average_performance_prediction.py -> Descomposición STL del rendimiento.
 #### Otros<br />
-- json_to_csv.py
-- air_quality_example.py
-<br />
+- json_to_csv.py -> Pasar datos de json (AEMET) a csv para su tratamiento.
+- air_quality_example.py -> Ejemplo realizado para aprender.
 ### ¿En qué orden ejecuto?<br />
+- 1º performance_prediction.py y acidity_prediction.py
+- 2º performance_acidity_prediction.py, performance_humidity_prediction.py y temp_precip_acidity.py.
+- 3º weighted_average_acidity_prediction.py y weighted_average_performance_prediction.py (Mejores resultados).
+- 4º weighted_average_performance_acidity_prediction.py
+- 5º STL_weighted_average_acidity_prediction.py y STL_weighted_average_performance_prediction.py
+- 6º STL_prediction_acidity.py y STL_prediction_performance.py
