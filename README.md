@@ -27,9 +27,31 @@ por<br />
 Una vez importado el proyecto a nuestro entorno simplemente hemos de ejecutar el archivo python que queramos.<br />
 En "files" se encuentran los datos usados, tanto en bruto como una vez hecho el tratamiento de estos. <br /><br />
 ### ¿Qué hace cada fichero?<br />
-- performance_prediction.py
-- acidity_prediction.py
-
+#### Predicción con una variable<br />
+- performance_prediction.py -> Predicción del rendimiento de la oliva usando rendimientos observados.
+- acidity_prediction.py -> Predicción de la acidez de la oliva usando acideces observadas
 <br />
-
+#### Predicción con múltiples variables: Dos variables<br />
+- performance_acidity_prediction.py -> Predicción del rendimiento de la oliva usando rendimientosy acideces observadas.
+- performance_humidity_prediction.py -> Predicción del rendimiento de la oliva usando rendimientos y humedad observadas.
+<br />
+#### Predicción con múltiples variables: Tres variables<br />
+- temp_precip_acidity.py
+- air_quality_example.py
+<br />
+#### Predicción usando la media ponderada de rendimiento y acidez de las cargas recibidas por días.<br />
+- weighted_average_acidity_prediction.py
+- weighted_average_performance_prediction.py
+- weighted_average_performance_acidity_prediction.py
+<br />
+#### Pruebas de predicción usando STL (Seasonal and Trend decomposition using Loess)<br />
+- STL_prediction_acidity.py
+- STL_prediction_performance.py
+- STL_weighted_average_acidity_prediction.py
+- STL_weighted_average_performance_prediction.py
+<br />
+#### Otros<br />
+- json_to_csv.py
+- air_quality_example.py
+<br />
 ### ¿En qué orden ejecuto?<br />
